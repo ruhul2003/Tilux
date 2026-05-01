@@ -29,7 +29,7 @@ const Banner = () => {
     }, []);
 
     return (
-        <div className="bg-[#1D1D1D] flex flex-col items-center text-center px-6 pb-20 overflow-hidden">
+        <div className="bg-gradient-to-r from-zinc-800 to-gray-700 flex flex-col items-center text-center px-6 pb-20 overflow-hidden">
 
             {/* Top Badge - Reduced top margin */}
             <p className="flex items-center gap-2 font-semibold text-sm rounded-full bg-[#2F2F2F] px-4 py-2 text-white w-fit mt-8">
