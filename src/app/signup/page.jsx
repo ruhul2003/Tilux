@@ -2,8 +2,10 @@ import React from 'react';
 
 const SignUpPage = () => {
     return (
-        <div>
-            <h1>This is a signup page</h1>
+        <div className='min-h-screen bg-[#111111] pt-32 text-white'>
+            <h1 className='text-4xl font-bold text-center'>
+                This is a Signup Page
+            </h1>
         </div>
     );
 };

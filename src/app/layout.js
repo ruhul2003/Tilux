@@ -1,3 +1,4 @@
+
 import "./globals.css";
 import NavBar from "./components/navbar";
 import Footer from "./components/footer";
@@ -17,7 +18,7 @@ export default function RootLayout({ children }) {
         </header>
 
         {/* Main Content: flex-grow ensures the footer stays at the bottom even on short pages */}
-        <main className="flex-grow">
+        <main className="flex-grow ">
           {children}
         </main>
 

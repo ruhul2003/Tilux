@@ -1,11 +1,13 @@
 import React from 'react';
 
-const loginPage = () => {
+const LoginPage = () => {
     return (
-        <div>
-            <h1>This is a login page</h1>
+        <div className='min-h-screen bg-[#111111] pt-32 text-white'>
+            <h1 className='text-4xl font-bold text-center'>
+                This is a Login Page
+            </h1>
         </div>
     );
 };
 
-export default loginPage;
+export default LoginPage;
