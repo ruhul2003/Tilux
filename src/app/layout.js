@@ -1,5 +1,6 @@
 import "./globals.css";
-
+import NavBar from "./components/navbar";
+import Footer from "./components/footer";
 
 export const metadata = {
   title: "Tilux",
@@ -8,8 +9,21 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html data-theme="light" lang="en">
+      <body className="min-h-screen flex flex-col">
+        {/* Sticky Navbar */}
+        <header className="sticky top-0 z-50 ">
+          <NavBar />
+        </header>
+
+        {/* Main Content: flex-grow ensures the footer stays at the bottom even on short pages */}
+        <main className="flex-grow">
+          {children}
+        </main>
+
+        {/* Footer */}
+        <Footer />
+      </body>
     </html>
   );
 }
