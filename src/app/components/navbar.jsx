@@ -14,7 +14,7 @@ const NavBar = () => {
 
   return (
     // Added the same background color as the banner to prevent white space
-    <header className="w-full bg-gradient-to-r from-zinc-800 to-gray-700 pt-6 px-4 lg:px-8">
+    <header className="w-full bg-gradient-to-r from-zinc-800 to-gray-700 pt-3 px-4 lg:px-8">
       <nav
         className="
                 max-w-7xl mx-auto
@@ -95,12 +95,12 @@ const NavBar = () => {
 
         {/* Right Buttons */}
         <div className="flex items-center gap-3">
-          {/* <Link
+          <Link
             href="/login"
-            className="hidden sm:flex px-5 py-2 rounded-xl text-white font-medium hover:bg-white/10 transition"
+            className="px-5 py-2 rounded-full bg-[#FFD700] text-black font-bold hover:scale-105 transition"
           >
             Login
-          </Link> */}
+          </Link>
           <Link
             href="/signup"
             className="px-5 py-2 rounded-full bg-[#FFD700] text-black font-bold hover:scale-105 transition"
