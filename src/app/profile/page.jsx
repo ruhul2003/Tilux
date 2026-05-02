@@ -8,12 +8,26 @@ import { toast, Toaster } from "react-hot-toast";
 
 const ProfilePage = () => {
     const { data: session, isPending } = useSession();
-    
+
     const [isEditing, setIsEditing] = useState(false);
     const [loading, setLoading] = useState(false);
-    
-    const [formData, setFormData] = useState({ name: "", image: "" });
-    const [displayImage, setDisplayImage] = useState("");
+
+    const [formData, setFormData] = useState({
+        name: "",
+        image: "",
+    });
+
+    // DEFAULT AVATAR
+    const getDefaultAvatar = (name) =>
+        `https://ui-avatars.com/api/?name=${encodeURIComponent(
+            name || "User"
+        )}&background=FFD700&color=000000&size=128`;
+
+    // SAFE IMAGE SOURCE
+    const safeImageSrc =
+        formData.image?.trim() ||
+        session?.user?.image?.trim() ||
+        getDefaultAvatar(formData.name || session?.user?.name);
 
     useEffect(() => {
         if (session?.user) {
@@ -21,17 +35,18 @@ const ProfilePage = () => {
                 name: session.user.name || "",
                 image: session.user.image || "",
             });
-            setDisplayImage(session.user.image || getDefaultAvatar(session.user.name));
         }
     }, [session]);
 
-    const getDefaultAvatar = (name) => 
-        `https://ui-avatars.com/api/?name=${encodeURIComponent(name || "User")}&background=FFD700&color=000000&size=128`;
-
+    // INPUT CHANGE
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
     };
 
+    // SAVE PROFILE
     const handleSave = async () => {
         if (!formData.name?.trim()) {
             toast.error("Name is required");
@@ -39,18 +54,25 @@ const ProfilePage = () => {
         }
 
         setLoading(true);
+
         try {
             const { error } = await authClient.updateUser({
                 name: formData.name,
-                image: formData.image || null,
+                image: formData.image?.trim() || null,
             });
 
             if (error) {
-                toast.error(error.message || "Failed to update profile");
+                toast.error(
+                    error.message || "Failed to update profile"
+                );
             } else {
                 toast.success("Profile updated successfully!");
+
                 setIsEditing(false);
-                window.location.reload();
+
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
             }
         } catch (err) {
             toast.error("Something went wrong");
@@ -59,37 +81,57 @@ const ProfilePage = () => {
         }
     };
 
+    // IMAGE ERROR FALLBACK
     const handleImageError = (e) => {
-        const fallback = getDefaultAvatar(session?.user?.name);
-        e.currentTarget.src = fallback;
-        setDisplayImage(fallback);
+        e.currentTarget.src = getDefaultAvatar(
+            formData.name || session?.user?.name
+        );
     };
 
     // ==================== NOT LOGGED IN ====================
     if (!isPending && !session?.user) {
         return (
             <div className="min-h-screen bg-gradient-to-r from-zinc-800 to-gray-700 flex items-center justify-center px-4">
+
                 <div className="max-w-md w-full text-center">
+
                     <div className="mb-8">
                         <div className="w-24 h-24 mx-auto bg-white/10 rounded-full flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7" />
+
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="w-12 h-12 text-gray-400"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7"
+                                />
                             </svg>
                         </div>
                     </div>
 
-                    <h1 className="text-4xl font-bold text-white mb-4">Access Denied</h1>
+                    <h1 className="text-4xl font-bold text-white mb-4">
+                        Access Denied
+                    </h1>
+
                     <p className="text-gray-400 text-lg mb-10">
                         You need to be logged in to view your profile.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
                         <Link
                             href="/login"
                             className="px-8 py-4 bg-[#FFD700] text-black font-bold rounded-2xl hover:bg-yellow-400 transition"
                         >
                             Login Now
                         </Link>
+
                         <Link
                             href="/signup"
                             className="px-8 py-4 bg-white/10 text-white font-medium rounded-2xl hover:bg-white/20 transition"
@@ -106,7 +148,7 @@ const ProfilePage = () => {
         );
     }
 
-    // Loading State
+    // ==================== LOADING ====================
     if (isPending) {
         return (
             <div className="min-h-screen bg-gradient-to-r from-zinc-800 to-gray-700 flex items-center justify-center text-white">
@@ -115,25 +157,34 @@ const ProfilePage = () => {
         );
     }
 
-    // ==================== LOGGED IN USER ====================
+    // ==================== PROFILE PAGE ====================
     return (
         <div className="min-h-screen bg-gradient-to-r from-zinc-800 to-gray-700 py-12 px-4">
+
             <div className="max-w-3xl mx-auto">
-                <h1 className="text-4xl font-bold text-white text-center mb-10">My Profile</h1>
+
+                <h1 className="text-4xl font-bold text-white text-center mb-10">
+                    My Profile
+                </h1>
 
                 <div className="bg-white/10 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl">
-                    {/* Profile Picture */}
+
+                    {/* PROFILE IMAGE */}
                     <div className="flex flex-col items-center mb-10">
+
                         <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-[#FFD700]">
+
                             <Image
-                                src={displayImage}
+                                src={safeImageSrc}
                                 alt={session.user.name || "User"}
                                 fill
                                 className="object-cover"
                                 onError={handleImageError}
+                                unoptimized
                             />
                         </div>
 
+                        {/* IMAGE URL INPUT */}
                         {isEditing && (
                             <input
                                 type="url"
@@ -146,10 +197,15 @@ const ProfilePage = () => {
                         )}
                     </div>
 
-                    {/* User Info */}
+                    {/* USER INFO */}
                     <div className="space-y-6 max-w-md mx-auto">
+
+                        {/* NAME */}
                         <div>
-                            <label className="block text-sm text-gray-300 mb-2">Full Name</label>
+                            <label className="block text-sm text-gray-300 mb-2">
+                                Full Name
+                            </label>
+
                             {isEditing ? (
                                 <input
                                     type="text"
@@ -159,20 +215,27 @@ const ProfilePage = () => {
                                     className="w-full px-5 py-3 bg-white/10 border border-white/20 rounded-2xl text-white focus:border-[#FFD700] outline-none"
                                 />
                             ) : (
-                                <p className="text-2xl font-semibold text-white">{session.user.name}</p>
+                                <p className="text-2xl font-semibold text-white">
+                                    {session.user.name}
+                                </p>
                             )}
                         </div>
 
+                        {/* EMAIL */}
                         <div>
-                            <label className="block text-sm text-gray-300 mb-2">Email Address</label>
+                            <label className="block text-sm text-gray-300 mb-2">
+                                Email Address
+                            </label>
+
                             <p className="text-lg text-gray-300 bg-white/5 px-5 py-3 rounded-2xl">
                                 {session.user.email}
                             </p>
                         </div>
                     </div>
 
-                    {/* Buttons */}
+                    {/* BUTTONS */}
                     <div className="flex gap-4 mt-12 max-w-md mx-auto">
+
                         {isEditing ? (
                             <>
                                 <button
@@ -180,10 +243,15 @@ const ProfilePage = () => {
                                     disabled={loading}
                                     className="flex-1 py-4 bg-[#FFD700] text-black font-bold rounded-2xl hover:bg-yellow-400 transition disabled:opacity-70"
                                 >
-                                    {loading ? "Saving..." : "Save Changes"}
+                                    {loading
+                                        ? "Saving..."
+                                        : "Save Changes"}
                                 </button>
+
                                 <button
-                                    onClick={() => setIsEditing(false)}
+                                    onClick={() =>
+                                        setIsEditing(false)
+                                    }
                                     className="flex-1 py-4 bg-white/10 text-white font-medium rounded-2xl hover:bg-white/20 transition"
                                 >
                                     Cancel
@@ -191,7 +259,9 @@ const ProfilePage = () => {
                             </>
                         ) : (
                             <button
-                                onClick={() => setIsEditing(true)}
+                                onClick={() =>
+                                    setIsEditing(true)
+                                }
                                 className="flex-1 py-4 bg-[#FFD700] text-black font-bold rounded-2xl hover:bg-yellow-400 transition"
                             >
                                 Edit Profile
@@ -200,6 +270,7 @@ const ProfilePage = () => {
                     </div>
                 </div>
             </div>
+
             <Toaster position="top-center" />
         </div>
     );

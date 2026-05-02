@@ -117,7 +117,7 @@ const SignUpPage = () => {
                                     placeholder="https://example.com/your-photo.jpg"
                                     className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/10 text-white placeholder:text-gray-400 focus:border-[#FFD700]"
                                 />
-                                <p className="text-xs text-gray-400 mt-1">Leave empty if you don't have one</p>
+                                <p className="text-xs text-gray-400 mt-1">Leave empty if you do not have one</p>
                             </div>
                         </div>
 
