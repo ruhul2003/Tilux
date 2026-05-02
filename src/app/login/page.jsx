@@ -2,38 +2,14 @@
 
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 
 const LoginPage = () => {
 
-    const router = useRouter();
-
-    const {
-        register,
-        handleSubmit,
-        formState: { errors, isSubmitting },
-    } = useForm();
-
-    const onSubmit = async (data) => {
-        try {
-            console.log("Login Data:", data);
-            
-            // Placeholder for now (Demo Mode)
-            toast.success("Login successful! (Demo Mode)");
-            
-            // Redirect to home after success
-            setTimeout(() => {
-                router.push("/");
-            }, 1200);
-
-        } catch (err) {
-            console.error("Login error:", err);
-            toast.error("Something went wrong. Please try again.");
-        }
+    const {register, handleSubmit,watch ,formState:{errors}} = useForm(); 
+    const handleLoginFunc = (data) => {
+       console.log(data,"data");
     };
-
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-zinc-800 to-gray-700 px-4">
 
@@ -49,8 +25,8 @@ const LoginPage = () => {
                     </p>
                 </div>
 
-                {/* Form */}
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                {/* Form Design Only */}
+                <form className="space-y-5" onSubmit={handleSubmit(handleLoginFunc)}>
 
                     {/* Email */}
                     <div>
@@ -59,13 +35,11 @@ const LoginPage = () => {
                         </label>
                         <input
                             type="email"
-                            placeholder="Enter your email"
                             {...register("email", { required: "Email is required" })}
+                            placeholder="Enter your email"
                             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/10 text-white placeholder:text-gray-400 outline-none focus:border-[#FFD700] focus:ring-2 focus:ring-[#FFD700]/30 transition"
                         />
-                        {errors.email && (
-                            <p className="text-red-400 text-sm mt-2">{errors.email.message}</p>
-                        )}
+                        {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
                     </div>
 
                     {/* Password */}
@@ -75,13 +49,11 @@ const LoginPage = () => {
                         </label>
                         <input
                             type="password"
-                            placeholder="Enter your password"
                             {...register("password", { required: "Password is required" })}
+                            placeholder="Enter your password"
                             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/10 text-white placeholder:text-gray-400 outline-none focus:border-[#FFD700] focus:ring-2 focus:ring-[#FFD700]/30 transition"
                         />
-                        {errors.password && (
-                            <p className="text-red-400 text-sm mt-2">{errors.password.message}</p>
-                        )}
+                        {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
                     </div>
 
                     {/* Forgot Password */}
@@ -94,10 +66,9 @@ const LoginPage = () => {
                     {/* Login Button */}
                     <button
                         type="submit"
-                        disabled={isSubmitting}
-                        className="w-full py-3 rounded-xl bg-[#FFD700] text-black font-semibold hover:scale-[1.02] hover:bg-[#ffdf32] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full py-3 rounded-xl bg-[#FFD700] text-black font-semibold hover:scale-[1.02] hover:bg-[#ffdf32] transition-all duration-300"
                     >
-                        {isSubmitting ? "Logging in..." : "Login"}
+                        Login
                     </button>
 
                 </form>

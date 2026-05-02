@@ -2,38 +2,30 @@
 
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
+import { authClient } from "@/lib/auth-client";
 
 const SignUpPage = () => {
-    const router = useRouter();
 
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors, isSubmitting },
-    } = useForm();
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
+    // Watch password for confirm password validation
     const password = watch("password");
 
-    const onSubmit = async (data) => {
-        try {
-            console.log("Form Submitted:", data);
-            
-            // Placeholder - you can connect to your backend later
-            toast.success("Account created successfully! (Demo Mode)");
-            
-            // Simulate delay then redirect
-            setTimeout(() => {
-                router.push("/login");
-            }, 1500);
+    const handleSignUpFunc = async (data) => {
+        console.log(data, "Signup Data");
+        
+        const { email, fullName, photoURL, password } = data;
 
-        } catch (err) {
-            console.error("Error:", err);
-            toast.error("Something went wrong. Please try again.");
-        }
+        const { data: res, error } = await authClient.signUp.email({
+            name: fullName,
+            email: email,
+            password: password,
+            image: photoURL,
+            callbackURL: "/",
+        });
+        
+        console.log(res, error);
     };
 
     return (
@@ -51,51 +43,54 @@ const SignUpPage = () => {
                     </p>
                 </div>
 
-                {/* Form */}
-                <form onSubmit={handleSubmit(onSubmit)}>
+                {/* Form with React Hook Form */}
+                <form className="space-y-8" onSubmit={handleSubmit(handleSignUpFunc)}>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                         {/* Left Column */}
                         <div className="space-y-5">
 
-                            {/* Name */}
                             <div>
                                 <label className="block text-sm font-medium text-gray-200 mb-2">
                                     Full Name
                                 </label>
                                 <input
                                     type="text"
+                                    {...register("fullName", { required: "Full name is required" })}
                                     placeholder="Enter your full name"
-                                    {...register("name", { required: "Name is required" })}
                                     className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/10 text-white placeholder:text-gray-400 outline-none focus:border-[#FFD700] focus:ring-2 focus:ring-[#FFD700]/30 transition"
                                 />
-                                {errors.name && <p className="text-red-400 text-sm mt-2">{errors.name.message}</p>}
+                                {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName.message}</p>}
                             </div>
 
-                            {/* Email */}
                             <div>
                                 <label className="block text-sm font-medium text-gray-200 mb-2">
                                     Email Address
                                 </label>
                                 <input
                                     type="email"
+                                    {...register("email", {
+                                        required: "Email is required",
+                                        pattern: {
+                                            value: /^\S+@\S+$/i,
+                                            message: "Please enter a valid email"
+                                        }
+                                    })}
                                     placeholder="Enter your email"
-                                    {...register("email", { required: "Email is required" })}
                                     className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/10 text-white placeholder:text-gray-400 outline-none focus:border-[#FFD700] focus:ring-2 focus:ring-[#FFD700]/30 transition"
                                 />
-                                {errors.email && <p className="text-red-400 text-sm mt-2">{errors.email.message}</p>}
+                                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
                             </div>
 
-                            {/* Photo URL */}
                             <div>
                                 <label className="block text-sm font-medium text-gray-200 mb-2">
                                     Photo URL (Optional)
                                 </label>
                                 <input
                                     type="url"
-                                    placeholder="Enter your photo URL"
                                     {...register("photoURL")}
+                                    placeholder="Enter your photo URL"
                                     className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/10 text-white placeholder:text-gray-400 outline-none focus:border-[#FFD700] focus:ring-2 focus:ring-[#FFD700]/30 transition"
                                 />
                             </div>
@@ -105,38 +100,40 @@ const SignUpPage = () => {
                         {/* Right Column */}
                         <div className="space-y-5">
 
-                            {/* Password */}
                             <div>
                                 <label className="block text-sm font-medium text-gray-200 mb-2">
                                     Password
                                 </label>
                                 <input
                                     type="password"
-                                    placeholder="Create a password"
                                     {...register("password", {
                                         required: "Password is required",
-                                        minLength: { value: 6, message: "Password must be at least 6 characters" }
+                                        minLength: {
+                                            value: 6,
+                                            message: "Password must be at least 6 characters"
+                                        }
                                     })}
+                                    placeholder="Create a password"
                                     className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/10 text-white placeholder:text-gray-400 outline-none focus:border-[#FFD700] focus:ring-2 focus:ring-[#FFD700]/30 transition"
                                 />
-                                {errors.password && <p className="text-red-400 text-sm mt-2">{errors.password.message}</p>}
+                                {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
                             </div>
 
-                            {/* Confirm Password */}
                             <div>
                                 <label className="block text-sm font-medium text-gray-200 mb-2">
                                     Confirm Password
                                 </label>
                                 <input
                                     type="password"
-                                    placeholder="Confirm your password"
                                     {...register("confirmPassword", {
                                         required: "Please confirm your password",
-                                        validate: (value) => value === password || "Passwords do not match"
+                                        validate: (value) =>
+                                            value === password || "Passwords do not match"
                                     })}
+                                    placeholder="Confirm your password"
                                     className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/10 text-white placeholder:text-gray-400 outline-none focus:border-[#FFD700] focus:ring-2 focus:ring-[#FFD700]/30 transition"
                                 />
-                                {errors.confirmPassword && <p className="text-red-400 text-sm mt-2">{errors.confirmPassword.message}</p>}
+                                {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>}
                             </div>
 
                         </div>
@@ -147,10 +144,9 @@ const SignUpPage = () => {
                     <div className="flex justify-center mt-10">
                         <button
                             type="submit"
-                            disabled={isSubmitting}
-                            className="px-20 py-3 rounded-xl bg-[#FFD700] text-black font-semibold hover:scale-[1.03] hover:bg-[#ffdf32] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="px-20 py-3 rounded-xl bg-[#FFD700] text-black font-semibold hover:scale-[1.03] hover:bg-[#ffdf32] transition-all duration-300"
                         >
-                            {isSubmitting ? "Creating..." : "Create Account"}
+                            Create Account
                         </button>
                     </div>
 
