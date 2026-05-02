@@ -1,6 +1,14 @@
-import { createAuthClient } from "better-auth/react"
+import { createAuthClient } from "better-auth/react";
+
 export const authClient = createAuthClient({
-    /** The base URL of the server (optional if you're using the same domain) */
-    baseURL: "http://localhost:3000"
-})
-export const { signIn, signUp, useSession } = createAuthClient()
+    baseURL: process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
+});
+
+// Export commonly used hooks and functions
+export const {
+    useSession,
+    signIn,
+    signUp,
+    signOut,
+    updateUser,     // Important for profile editing
+} = authClient;

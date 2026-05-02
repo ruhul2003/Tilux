@@ -1,15 +1,22 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { IoMdRadioButtonOn } from "react-icons/io";
 import { FaCheckCircle } from "react-icons/fa";
 import Image from "next/image";
 import Marquee from "react-fast-marquee";
+import { useSession } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 const Banner = () => {
+    const { data: session, isPending } = useSession();
+    const router = useRouter();
+
     const [tiles, setTiles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [showLoginModal, setShowLoginModal] = useState(false);
 
     useEffect(() => {
         const getData = async () => {
@@ -33,8 +40,17 @@ const Banner = () => {
         getData();
     }, []);
 
+    // Handle protected navigation
+    const handleProtectedNavigation = () => {
+        if (session?.user) {
+            router.push("/all-tiles");
+        } else {
+            setShowLoginModal(true);
+        }
+    };
+
     return (
-        <div className="bg-gradient-to-r from-zinc-800 to-gray-700 flex flex-col items-center text-center px-4 md:px-6 pb-20 overflow-hidden">
+        <div className="bg-gradient-to-r from-zinc-800 to-gray-700 flex flex-col items-center text-center px-4 md:px-6 pb-20 overflow-hidden relative">
             
             {/* HERO SECTION */}
             <div className="min-h-[70vh] md:min-h-[85vh] text-center flex flex-col justify-center items-center w-full max-w-7xl">
@@ -65,10 +81,13 @@ const Banner = () => {
                     ))}
                 </ul>
 
-                {/* CTA Button */}
-                <Link href="/all-tiles" className="bg-white text-black mt-10 rounded-full font-bold text-base md:text-lg px-8 md:px-10 py-3 md:py-4 hover:bg-[#FFD700] hover:scale-105 transition-all duration-300 shadow-lg">
+                {/* Browse Now Button */}
+                <button
+                    onClick={handleProtectedNavigation}
+                    className="bg-white text-black mt-10 rounded-full font-bold text-base md:text-lg px-8 md:px-10 py-3 md:py-4 hover:bg-[#FFD700] hover:scale-105 transition-all duration-300 shadow-lg cursor-pointer"
+                >
                     Browse Now
-                </Link>
+                </button>
 
                 {/* MARQUEE SECTION */}
                 {!loading && !error && tiles.length > 0 && (
@@ -93,14 +112,17 @@ const Banner = () => {
                         <h2 className="text-white text-3xl md:text-5xl font-bold">Featured Products</h2>
                         <div className="h-1.5 w-20 bg-[#FFD700] mt-4 rounded-full"></div>
                     </div>
-                    {!loading && (
-                         <Link href="/all-tiles" className="text-gray-300 hover:text-[#FFD700] text-sm font-medium transition">
-                            View All Collection &rarr;
-                         </Link>
-                    )}
+                    
+                    {/* View All Collection - Protected */}
+                    <button
+                        onClick={handleProtectedNavigation}
+                        className="text-gray-300 hover:text-[#FFD700] text-sm font-medium transition cursor-pointer"
+                    >
+                        View All Collection &rarr;
+                    </button>
                 </div>
 
-                {/* States */}
+                {/* Loading / Error / Grid ... (rest remains same) */}
                 {loading && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {[1, 2, 3, 4].map((n) => (
@@ -111,7 +133,6 @@ const Banner = () => {
                 
                 {error && <p className="text-red-400 bg-red-400/10 py-4 px-6 rounded-xl border border-red-400/20">{error}</p>}
 
-                {/* Grid */}
                 {!loading && !error && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                         {tiles.slice(0, 4).map((tile) => (
@@ -119,7 +140,6 @@ const Banner = () => {
                                 key={tile.id}
                                 className="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-2xl shadow-xl overflow-hidden text-left flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20"
                             >
-                                {/* Product Image */}
                                 <div className="relative w-full h-56 overflow-hidden">
                                     <Image
                                         src={tile.image}
@@ -130,7 +150,6 @@ const Banner = () => {
                                     />
                                 </div>
 
-                                {/* Content */}
                                 <div className="p-5 flex-grow flex flex-col text-white">
                                     <div className="flex justify-between items-start gap-2">
                                         <h3 className="text-lg font-bold line-clamp-1">{tile.title}</h3>
@@ -148,7 +167,7 @@ const Banner = () => {
                                             {tile.inStock ? "Available" : "Sold Out"}
                                         </span>
                                         <button className="text-xs font-bold hover:text-[#FFD700] transition">
-                                            DETAILS +
+                                            DETAILS
                                         </button>
                                     </div>
                                 </div>
@@ -157,6 +176,56 @@ const Banner = () => {
                     </div>
                 )}
             </div>
+
+            {/* ==================== LOGIN MODAL ==================== */}
+            {showLoginModal && (
+                <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+                    <div className="bg-zinc-900 rounded-3xl max-w-md w-full p-8 text-center border border-white/10">
+                        <div className="w-20 h-20 mx-auto bg-white/10 rounded-full flex items-center justify-center mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7" />
+                            </svg>
+                        </div>
+
+                        <h2 className="text-3xl font-bold text-white mb-3">Login Required</h2>
+                        <p className="text-gray-400 mb-8">
+                            You need to be logged in to browse our collection.
+                        </p>
+
+                        <div className="flex flex-col gap-3">
+                            <button
+                                onClick={() => {
+                                    setShowLoginModal(false);
+                                    router.push("/login");
+                                }}
+                                className="bg-[#FFD700] text-black font-bold py-4 rounded-2xl hover:bg-yellow-400 transition"
+                            >
+                                Login Now
+                            </button>
+                            
+                            <button
+                                onClick={() => setShowLoginModal(false)}
+                                className="bg-white/10 text-white font-medium py-4 rounded-2xl hover:bg-white/20 transition"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+
+                        <p className="text-sm text-gray-500 mt-6">
+                            Don&apos;t have an account? 
+                            <button 
+                                onClick={() => {
+                                    setShowLoginModal(false);
+                                    router.push("/signup");
+                                }}
+                                className="text-[#FFD700] hover:underline ml-1"
+                            >
+                                Sign up
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
