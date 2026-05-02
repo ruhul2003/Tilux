@@ -2,6 +2,7 @@
 import "./globals.css";
 import NavBar from "./components/navbar";
 import Footer from "./components/footer";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "Tilux",

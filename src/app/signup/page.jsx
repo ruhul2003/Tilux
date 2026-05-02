@@ -1,6 +1,60 @@
-import React from 'react';
+"use client";
 
+import React from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
 const SignUpPage = () => {
+
+    // Next Router
+    const router = useRouter();
+
+    // React Hook Form
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors, isSubmitting },
+    } = useForm();
+
+    // Watch password field
+    const password = watch("password");
+
+    // Submit handler
+    const onSubmit = async (data) => {
+
+    try {
+
+        await authClient.signUp.email({
+
+            email: data.email,
+            password: data.password,
+            name: data.name,
+            image: data.photoURL,
+
+        });
+
+        // Success Toast
+        toast.success("Account created successfully!");
+
+        // Redirect after short delay
+        setTimeout(() => {
+
+            router.push("/login");
+
+        }, 1200);
+
+    } catch (error) {
+
+        console.error(error);
+
+        toast.error("Signup failed");
+
+    }
+};
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-zinc-800 to-gray-700 px-4 py-10">
 
@@ -18,6 +72,7 @@ const SignUpPage = () => {
 
                 {/* Heading */}
                 <div className="text-center mb-10">
+
                     <h1 className="text-3xl font-bold text-white">
                         Create Account
                     </h1>
@@ -25,10 +80,11 @@ const SignUpPage = () => {
                     <p className="text-gray-300 mt-2 text-sm">
                         Join us and explore premium marble & tile collections
                     </p>
+
                 </div>
 
                 {/* Form */}
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
@@ -37,6 +93,7 @@ const SignUpPage = () => {
 
                             {/* Name */}
                             <div>
+
                                 <label className="block text-sm font-medium text-gray-200 mb-2">
                                     Full Name
                                 </label>
@@ -44,6 +101,9 @@ const SignUpPage = () => {
                                 <input
                                     type="text"
                                     placeholder="Enter your full name"
+                                    {...register("name", {
+                                        required: "Name is required",
+                                    })}
                                     className="
                                         w-full
                                         px-4 py-3
@@ -59,10 +119,18 @@ const SignUpPage = () => {
                                         transition
                                     "
                                 />
+
+                                {errors.name && (
+                                    <p className="text-red-400 text-sm mt-2">
+                                        {errors.name.message}
+                                    </p>
+                                )}
+
                             </div>
 
                             {/* Email */}
                             <div>
+
                                 <label className="block text-sm font-medium text-gray-200 mb-2">
                                     Email Address
                                 </label>
@@ -70,6 +138,9 @@ const SignUpPage = () => {
                                 <input
                                     type="email"
                                     placeholder="Enter your email"
+                                    {...register("email", {
+                                        required: "Email is required",
+                                    })}
                                     className="
                                         w-full
                                         px-4 py-3
@@ -85,10 +156,18 @@ const SignUpPage = () => {
                                         transition
                                     "
                                 />
+
+                                {errors.email && (
+                                    <p className="text-red-400 text-sm mt-2">
+                                        {errors.email.message}
+                                    </p>
+                                )}
+
                             </div>
 
                             {/* Photo URL */}
                             <div>
+
                                 <label className="block text-sm font-medium text-gray-200 mb-2">
                                     Photo URL
                                 </label>
@@ -96,6 +175,7 @@ const SignUpPage = () => {
                                 <input
                                     type="url"
                                     placeholder="Enter your photo URL"
+                                    {...register("photoURL")}
                                     className="
                                         w-full
                                         px-4 py-3
@@ -111,6 +191,7 @@ const SignUpPage = () => {
                                         transition
                                     "
                                 />
+
                             </div>
 
                         </div>
@@ -120,6 +201,7 @@ const SignUpPage = () => {
 
                             {/* Password */}
                             <div>
+
                                 <label className="block text-sm font-medium text-gray-200 mb-2">
                                     Password
                                 </label>
@@ -127,6 +209,14 @@ const SignUpPage = () => {
                                 <input
                                     type="password"
                                     placeholder="Create a password"
+                                    {...register("password", {
+                                        required: "Password is required",
+                                        minLength: {
+                                            value: 6,
+                                            message:
+                                                "Password must be at least 6 characters",
+                                        },
+                                    })}
                                     className="
                                         w-full
                                         px-4 py-3
@@ -142,10 +232,18 @@ const SignUpPage = () => {
                                         transition
                                     "
                                 />
+
+                                {errors.password && (
+                                    <p className="text-red-400 text-sm mt-2">
+                                        {errors.password.message}
+                                    </p>
+                                )}
+
                             </div>
 
                             {/* Confirm Password */}
                             <div>
+
                                 <label className="block text-sm font-medium text-gray-200 mb-2">
                                     Confirm Password
                                 </label>
@@ -153,6 +251,13 @@ const SignUpPage = () => {
                                 <input
                                     type="password"
                                     placeholder="Confirm your password"
+                                    {...register("confirmPassword", {
+                                        required:
+                                            "Please confirm your password",
+                                        validate: (value) =>
+                                            value === password ||
+                                            "Passwords do not match",
+                                    })}
                                     className="
                                         w-full
                                         px-4 py-3
@@ -168,6 +273,13 @@ const SignUpPage = () => {
                                         transition
                                     "
                                 />
+
+                                {errors.confirmPassword && (
+                                    <p className="text-red-400 text-sm mt-2">
+                                        {errors.confirmPassword.message}
+                                    </p>
+                                )}
+
                             </div>
 
                         </div>
@@ -176,8 +288,10 @@ const SignUpPage = () => {
 
                     {/* Button */}
                     <div className="flex justify-center mt-10">
+
                         <button
                             type="submit"
+                            disabled={isSubmitting}
                             className="
                                 px-20
                                 py-3
@@ -189,20 +303,36 @@ const SignUpPage = () => {
                                 hover:bg-[#ffdf32]
                                 transition-all
                                 duration-300
+                                disabled:opacity-50
+                                disabled:cursor-not-allowed
                             "
                         >
-                            Create Account
+                            {
+                                isSubmitting
+                                    ? "Creating..."
+                                    : "Create Account"
+                            }
                         </button>
+
                     </div>
 
                 </form>
 
                 {/* Footer */}
                 <p className="text-center text-sm text-gray-300 mt-6">
+
                     Already have an account?{" "}
-                    <span className="text-[#FFD700] cursor-pointer hover:underline">
+
+                    <Link
+                        href="/login"
+                        className="
+                            text-[#FFD700]
+                            hover:underline
+                        "
+                    >
                         Login
-                    </span>
+                    </Link>
+
                 </p>
 
             </div>
