@@ -1,18 +1,24 @@
-import dns from "node:dns";
-dns.setServers(['8.8.8.8', '8.8.4.4']);
-
 import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
+import dns from "node:dns";
 
-const client = new MongoClient(process.env.MONGODB_URI);
-const db = client.db();
+// Optional DNS fix for MongoDB Atlas
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
+// Create MongoDB client
+const client = new MongoClient(process.env.MONGO_URI);
+
+// Connect to MongoDB
+await client.connect();
+
+// Select database
+const db = client.db("sample_mflix");
 
 export const auth = betterAuth({
-    database: mongodbAdapter(db,{
-      client,
-    }),
-    emailAndPassword: { 
-    enabled: true, 
+  database: mongodbAdapter(db),
+
+  emailAndPassword: {
+    enabled: true,
   },
 });
