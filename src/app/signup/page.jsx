@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from "react";
 import Link from "next/link";
@@ -8,10 +8,8 @@ import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 const SignUpPage = () => {
 
-    // Next Router
     const router = useRouter();
 
-    // React Hook Form
     const {
         register,
         handleSubmit,
@@ -19,41 +17,36 @@ const SignUpPage = () => {
         formState: { errors, isSubmitting },
     } = useForm();
 
-    // Watch password field
     const password = watch("password");
 
-    // Submit handler
     const onSubmit = async (data) => {
+        try {
+            console.log("Sending signup data:", {
+                email: data.email,
+                name: data.name
+            });
 
-    try {
+            const { data: result, error } = await authClient.signUp.email({
+                email: data.email,
+                password: data.password,
+                name: data.name,
+                image: data.photoURL || undefined,
+               
+            });
 
-        await authClient.signUp.email({
+            if (error) {
+                console.error("Better Auth Error:", error);
+                toast.error(error.message || "Signup failed");
+                return;
+            }
 
-            email: data.email,
-            password: data.password,
-            name: data.name,
-            image: data.photoURL,
+            toast.success("Account created successfully!");
 
-        });
-
-        // Success Toast
-        toast.success("Account created successfully!");
-
-        // Redirect after short delay
-        setTimeout(() => {
-
-            router.push("/login");
-
-        }, 1200);
-
-    } catch (error) {
-
-        console.error(error);
-
-        toast.error("Signup failed");
-
-    }
-};
+        } catch (err) {
+            console.error("Signup error:", err);
+            toast.error("Signup failed. Please check console.");
+        }
+    };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-zinc-800 to-gray-700 px-4 py-10">
@@ -196,10 +189,7 @@ const SignUpPage = () => {
 
                         </div>
 
-                        {/* Right Column */}
                         <div className="space-y-5">
-
-                            {/* Password */}
                             <div>
 
                                 <label className="block text-sm font-medium text-gray-200 mb-2">
