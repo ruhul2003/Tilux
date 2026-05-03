@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Tilux :
+=======
+Tilux is a modern marble and tiles showcase web application built with Next.js. It provides users with a premium UI to explore luxury marble collections, view detailed product information, manage profiles, and experience protected browsing features with authentication.
 
-## Getting Started
+Live URL :
+==========
+https://your-live-site-url.com
 
-First, run the development server:
+Project Purpose :
+=================
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The purpose of Tilux is to create a professional and elegant marble showroom platform where users can:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+=> Explore premium marble and tile collections
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+=> View detailed product information
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+=> Access protected routes with authentication
 
-## Learn More
+=> Manage user profiles
 
-To learn more about Next.js, take a look at the following resources:
+=> Experience a modern responsive UI
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Key Features :
+==============
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+=> Modern responsive UI with glassmorphism design
 
-## Deploy on Vercel
+=> User authentication system
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+=> Protected routes and protected product details
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+=> Login modal for unauthorized users
+
+=> Dynamic tile details pages
+
+=> User profile management
+
+=> Edit profile functionality
+
+=> Default avatar fallback system
+
+=> Custom 404 Page Not Found screen
+
+=> Animated marquee section
+
+=> Responsive footer with contact section
+
+=> Loading skeletons and error handling
+
+=> Toast notifications
+
+Technologies Used :
+===================
+
+=> Next.js
+
+=> React.js
+
+=> Tailwind CSS
+
+=> Better Auth
+
+=> MongoDB
+
+=> React Hot Toast
+
+=> React Icons
+
+=> React Fast Marquee
+
+NPM Packages Used :
+===================
+
+=> npm install react-icons
+=> npm install react-hot-toast
+=> npm install react-fast-marquee
+=> npm install better-auth
+=> npm install mongodb
+
+Authentication Features :
+=========================
+
+=> User login
+
+=> User signup
+
+=> Session management
+
+=> Protected navigation
+
+=> Profile update system
+
+Future Improvements :
+=====================
+
+=> Product filtering
+
+=> Wishlist system
+
+=> Shopping cart
+
+=> Payment integration
+
+=> Admin dashboard
+
+=> Dark/light theme switcher
+
+===============================
+
+Author :
+========
+Developed by Ruhul Amin
