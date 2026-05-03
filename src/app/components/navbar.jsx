@@ -183,24 +183,17 @@ const NavBar = () => {
                                             >
                                                 {/* Profile Image */}
                                                 <div className="w-9 h-9 rounded-full overflow-hidden border border-white/20">
-
                                                     {profileImageUrl && (
                                                         <Image
                                                             src={profileImageUrl}
-                                                            alt={
-                                                                session.user
-                                                                    .name ||
-                                                                "User"
-                                                            }
+                                                            alt={session.user.name || "User"}
+                                                            width={36}   // <--- Add this
+                                                            height={36}  // <--- Add this
                                                             className="w-full h-full object-cover"
                                                             onError={(e) => {
-                                                                e.currentTarget.src =
-                                                                    `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                                                                        session
-                                                                            .user
-                                                                            .name ||
-                                                                            "User"
-                                                                    )}&background=FFD700&color=000000&size=128`;
+                                                                e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                                                                    session.user.name || "User"
+                                                                )}&background=FFD700&color=000000&size=128`;
                                                             }}
                                                         />
                                                     )}
