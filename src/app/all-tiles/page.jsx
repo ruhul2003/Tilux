@@ -102,7 +102,18 @@ const AllTiles = () => {
 
 
             {loading && (
-                <p className="text-center text-zinc-300 text-lg">Loading tiles...</p>
+                <div className="flex flex-col items-center justify-center py-20 transition-opacity duration-300">
+                    {/* Animated Spinner */}
+                    <div className="relative w-16 h-16">
+                        <div className="absolute w-full h-full border-4 border-white/20 rounded-full"></div>
+                        <div className="absolute w-full h-full border-4 border-t-white border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"></div>
+                    </div>
+
+                    {/* Loading Text */}
+                    <p className="mt-6 text-zinc-300 text-lg font-medium tracking-wide animate-pulse">
+                        Loading products...
+                    </p>
+                </div>
             )}
 
 
@@ -140,11 +151,10 @@ const AllTiles = () => {
                                         </span>
 
                                         <span
-                                            className={`text-xs px-3 py-1 rounded-full border ${
-                                                tile.inStock
+                                            className={`text-xs px-3 py-1 rounded-full border ${tile.inStock
                                                     ? "bg-green-500/10 text-green-300 border-green-400/20"
                                                     : "bg-red-500/10 text-red-300 border-red-400/20"
-                                            }`}
+                                                }`}
                                         >
                                             {tile.inStock ? "In Stock" : "Out of Stock"}
                                         </span>
