@@ -1,8 +1,6 @@
 import { createAuthClient } from "better-auth/react";
 
-export const authClient = createAuthClient({
-    baseURL: process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
-});
+export const authClient = createAuthClient();
 
 // Export commonly used hooks and functions
 export const {
@@ -10,5 +8,5 @@ export const {
     signIn,
     signUp,
     signOut,
-    updateUser,     // Important for profile editing
+    updateUser,
 } = authClient;
