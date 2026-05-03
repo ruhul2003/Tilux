@@ -185,7 +185,7 @@ const NavBar = () => {
                                                 <div className="w-9 h-9 rounded-full overflow-hidden border border-white/20">
 
                                                     {profileImageUrl && (
-                                                        <img
+                                                        <Image
                                                             src={profileImageUrl}
                                                             alt={
                                                                 session.user
@@ -278,7 +278,6 @@ const NavBar = () => {
                             ✕
                         </button>
 
-                        {/* Icon */}
                         <div className="w-20 h-20 mx-auto bg-white/10 rounded-full flex items-center justify-center mb-6">
 
                             <svg
@@ -302,12 +301,10 @@ const NavBar = () => {
                             Login Required
                         </h2>
 
-                        {/* Description */}
                         <p className="text-gray-400 mb-8">
                             You need to be logged in to browse our collection.
                         </p>
 
-                        {/* Buttons */}
                         <div className="flex flex-col gap-3">
 
                             <button

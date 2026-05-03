@@ -127,7 +127,7 @@ function Footer() {
                         </ul>
                     </div>
 
-                    {/* CONTACT US */}
+
                     <div>
                         <h1 className="text-[18px] font-semibold">
                             Contact Us
@@ -135,7 +135,7 @@ function Footer() {
 
                         <div className="mt-4 flex flex-col gap-4 text-[#777] text-sm">
 
-                            {/* EMAIL */}
+
                             <div className="flex items-start gap-3">
 
                                 <MdEmail

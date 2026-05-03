@@ -8,7 +8,7 @@ const nextConfig = {
             { protocol: "https", hostname: "ui-avatars.com" },
             { protocol: "https", hostname: "photoforprofile.com" },
             { protocol: "https", hostname: "image.com" },
-            // Add more as needed
+
         ],
     },
 };

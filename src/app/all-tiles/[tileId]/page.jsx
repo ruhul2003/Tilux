@@ -62,7 +62,6 @@ const TileDetails = ({ params: paramsPromise }) => {
             {/* GLASS CARD */}
             <div className="w-full max-w-6xl grid md:grid-cols-2 gap-10 p-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl shadow-2xl">
 
-                {/* IMAGE */}
                 <div className="relative w-full h-[420px] md:h-[600px] rounded-2xl overflow-hidden">
                     <Image
                         src={tile.image}
@@ -73,7 +72,6 @@ const TileDetails = ({ params: paramsPromise }) => {
                     />
                 </div>
 
-                {/* DETAILS */}
                 <div className="flex flex-col justify-center">
 
                     <Link
@@ -95,7 +93,7 @@ const TileDetails = ({ params: paramsPromise }) => {
                         {tile.description}
                     </p>
 
-                    {/* TAGS */}
+
                     <div className="flex flex-wrap gap-2 mt-6">
                         {(tile.tags || [tile.category]).map((tag, i) => (
                             <span
@@ -107,13 +105,12 @@ const TileDetails = ({ params: paramsPromise }) => {
                         ))}
                     </div>
 
-                    {/* INFO */}
                     <div className="mt-8 text-sm text-zinc-300 space-y-1">
                         <p>Material: {tile.material}</p>
                         <p>Dimensions: {tile.dimensions}</p>
                     </div>
 
-                    {/* PRICE + CTA */}
+
                     <div className="mt-10 flex items-center justify-between">
                         <p className="text-2xl font-semibold text-white">
                             ${tile.price}{" "}

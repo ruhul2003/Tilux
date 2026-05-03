@@ -81,7 +81,6 @@ const ProfilePage = () => {
         }
     };
 
-    // IMAGE ERROR FALLBACK
     const handleImageError = (e) => {
         e.currentTarget.src = getDefaultAvatar(
             formData.name || session?.user?.name
@@ -169,7 +168,6 @@ const ProfilePage = () => {
 
                 <div className="bg-white/10 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl">
 
-                    {/* PROFILE IMAGE */}
                     <div className="flex flex-col items-center mb-10">
 
                         <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-[#FFD700]">
@@ -184,7 +182,6 @@ const ProfilePage = () => {
                             />
                         </div>
 
-                        {/* IMAGE URL INPUT */}
                         {isEditing && (
                             <input
                                 type="url"
@@ -221,7 +218,6 @@ const ProfilePage = () => {
                             )}
                         </div>
 
-                        {/* EMAIL */}
                         <div>
                             <label className="block text-sm text-gray-300 mb-2">
                                 Email Address
@@ -233,7 +229,6 @@ const ProfilePage = () => {
                         </div>
                     </div>
 
-                    {/* BUTTONS */}
                     <div className="flex gap-4 mt-12 max-w-md mx-auto">
 
                         {isEditing ? (

@@ -4,7 +4,7 @@ Tilux is a modern marble and tiles showcase web application built with Next.js. 
 
 Live URL :
 ==========
-https://your-live-site-url.com
+https://tilux.vercel.app/
 
 Project Purpose :
 =================

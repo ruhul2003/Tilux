@@ -17,7 +17,7 @@ const LoginPage = () => {
             const { data: res, error } = await authClient.signIn.email({
                 email: data.email,
                 password: data.password,
-                callbackURL: "/",        // Redirect to home after login
+                callbackURL: "/", 
             });
 
             if (error) {
@@ -29,7 +29,7 @@ const LoginPage = () => {
                 duration: 5000,
                 position: "top-center",
             });
-            router.push("/"); // Fallback redirect
+            router.push("/"); 
 
         } catch (err) {
             console.error(err);
@@ -37,7 +37,6 @@ const LoginPage = () => {
         }
     };
 
-    // Optional: Continue with Google
     const handleGoogleLogin = async () => {
         try {
             await authClient.signIn.social({
@@ -54,7 +53,6 @@ const LoginPage = () => {
 
             <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/10 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.35)] p-8">
 
-                {/* Heading */}
                 <div className="text-center mb-8">
                     <h1 className="text-3xl font-bold text-white">
                         Welcome Back
@@ -64,7 +62,6 @@ const LoginPage = () => {
                     </p>
                 </div>
 
-                {/* Google Login Button */}
                 <button
                     onClick={handleGoogleLogin}
                     type="button"
@@ -73,17 +70,14 @@ const LoginPage = () => {
                     <span>Continue with Google</span>
                 </button>
 
-                {/* Divider */}
                 <div className="flex items-center gap-4 my-6">
                     <div className="flex-1 h-px bg-white/10"></div>
                     <span className="text-gray-400 text-sm">OR</span>
                     <div className="flex-1 h-px bg-white/10"></div>
                 </div>
 
-                {/* Form */}
                 <form className="space-y-5" onSubmit={handleSubmit(handleLoginFunc)}>
 
-                    {/* Email */}
                     <div>
                         <label className="block text-sm font-medium text-gray-200 mb-2">
                             Email Address
@@ -103,7 +97,6 @@ const LoginPage = () => {
                         {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
                     </div>
 
-                    {/* Password */}
                     <div>
                         <label className="block text-sm font-medium text-gray-200 mb-2">
                             Password
@@ -123,14 +116,12 @@ const LoginPage = () => {
                         {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
                     </div>
 
-                    {/* Forgot Password */}
                     <div className="flex justify-end">
                         <Link href="/forgot-password" className="text-sm text-[#FFD700] hover:underline">
                             Forgot Password?
                         </Link>
                     </div>
 
-                    {/* Login Button */}
                     <button
                         type="submit"
                         disabled={isSubmitting}
@@ -141,9 +132,8 @@ const LoginPage = () => {
 
                 </form>
 
-                {/* Footer */}
                 <p className="text-center text-sm text-gray-300 mt-6">
-                    Don’t have an account?{" "}
+                    Don't have an account?{" "}
                     <Link href="/signup" className="text-[#FFD700] hover:underline">
                         Sign Up
                     </Link>

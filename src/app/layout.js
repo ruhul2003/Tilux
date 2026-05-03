@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html data-theme="light" lang="en">
       <body className="min-h-screen flex flex-col">
-        {/* Toast notifications handler */}
+
         <Toaster position="top-center" reverseOrder={false} />
         
         <header className="sticky top-0 z-50">
