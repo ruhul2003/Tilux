@@ -14,7 +14,7 @@ const AllTiles = () => {
         const getTiles = async () => {
             try {
                 setLoading(true);
-                const res = await fetch("https://tilux-server.onrender.com/tiles", {
+                const res = await fetch("http://localhost:5000/api/tiles", {
                     cache: "no-store",
                 });
 

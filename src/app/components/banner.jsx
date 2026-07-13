@@ -27,7 +27,7 @@ const Banner = () => {
             try {
                 setLoading(true);
                 const res = await fetch(
-                    "https://tilux-server.onrender.com/tiles",
+                    "http://localhost:5000/api/tiles",
                     { cache: "no-store" }
                 );
 

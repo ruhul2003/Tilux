@@ -12,6 +12,11 @@ const NavBar = () => {
     const { data: session, isPending } = useSession();
     const router = useRouter();
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    React.useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const navLinks = [
         { name: "Home", path: "/" },
@@ -87,7 +92,7 @@ const NavBar = () => {
 
                     {/* ================= RIGHT SIDE: AUTH + MOBILE MENU ================= */}
                     <div className="flex items-center gap-3">
-                        {!isPending && (
+                        {mounted && !isPending && (
                             <>
                                 {session?.user ? (
                                     /* LOGGED IN: Profile Dropdown (Shows on all devices) */
