@@ -17,7 +17,7 @@ const TileDetails = ({ params: paramsPromise }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Edit states
+    const [ordering, setOrdering] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [tileFormData, setTileFormData] = useState({
         title: "",
@@ -29,6 +29,7 @@ const TileDetails = ({ params: paramsPromise }) => {
         material: "",
         inStock: true
     });
+
 
     useEffect(() => {
         const fetchTile = async () => {
@@ -111,6 +112,37 @@ const TileDetails = ({ params: paramsPromise }) => {
             toast.error("Network error updating tile");
         }
     };
+    const handlePlaceOrder = async () => {
+        if (!session?.user) {
+            toast.error("Please login to place an order");
+            return;
+        }
+
+        setOrdering(true);
+        const token = localStorage.getItem("tilux_token");
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/orders`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({ tileId, quantity: 1 })
+            });
+
+            const data = await res.json();
+            if (res.ok) {
+                toast.success("Order placed successfully! You can track it in My Orders.");
+            } else {
+                toast.error(data.message || "Failed to place order");
+            }
+        } catch (err) {
+            toast.error("Network error placing order");
+        } finally {
+            setOrdering(false);
+        }
+    };
+
 
     if (loading)
         return (
@@ -191,14 +223,15 @@ const TileDetails = ({ params: paramsPromise }) => {
                             </button>
                         ) : (
                             <button
-                                disabled={!tile.inStock}
+                                disabled={!tile.inStock || ordering}
+                                onClick={handlePlaceOrder}
                                 className={`px-8 py-3 rounded-full text-sm font-semibold transition border cursor-pointer ${
                                     tile.inStock
                                         ? "bg-white text-black hover:bg-zinc-200 border-white hover:scale-105"
                                         : "bg-white/10 text-zinc-500 border-white/10 cursor-not-allowed"
                                 }`}
                             >
-                                {tile.inStock ? "Buy Now" : "Out of Stock"}
+                                {ordering ? "Placing Order..." : tile.inStock ? "Order Now" : "Out of Stock"}
                             </button>
                         )}
                     </div>

@@ -18,11 +18,22 @@ const NavBar = () => {
         setMounted(true);
     }, []);
 
-    const navLinks = [
+    const baseLinks = [
         { name: "Home", path: "/" },
         { name: "All Tiles", path: "/all-tiles" },
-        { name: "My Profile", path: "/profile" },
     ];
+
+    if (session?.user) {
+        if (session.user.role === "shop_owner") {
+            baseLinks.push({ name: "Manage Orders", path: "/manage-orders" });
+        } else {
+            baseLinks.push({ name: "My Orders", path: "/my-orders" });
+        }
+        baseLinks.push({ name: "My Profile", path: "/profile" });
+    }
+
+    const navLinks = baseLinks;
+
 
     // ================= LOGOUT =================
     const handleLogout = async () => {
@@ -69,10 +80,10 @@ const NavBar = () => {
                     <div className="hidden lg:flex items-center gap-10">
                         {navLinks.map((link) => (
                             <div key={link.path}>
-                                {link.name === "All Tiles" ? (
+                                {link.name !== "Home" ? (
                                     <button
-                                        onClick={() => handleProtectedNavigation("/all-tiles")}
-                                        className="relative text-white text-[16px] font-medium tracking-wide transition hover:text-[#FFD700] group cursor-pointer"
+                                        onClick={() => handleProtectedNavigation(link.path)}
+                                        className="relative text-white text-[16px] font-medium tracking-wide transition hover:text-[#FFD700] group cursor-pointer bg-transparent border-none outline-none"
                                     >
                                         {link.name}
                                         <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[#FFD700] transition-all duration-300 group-hover:w-full"></span>
