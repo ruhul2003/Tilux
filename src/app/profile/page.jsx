@@ -5,6 +5,8 @@ import { useSession, authClient, API_BASE_URL } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
 import { toast, Toaster } from "react-hot-toast";
+import { motion } from "framer-motion";
+
 
 const ProfilePage = () => {
     const { data: session, isPending } = useSession();
@@ -250,13 +252,23 @@ const ProfilePage = () => {
     // ==================== PROFILE DASHBOARD PAGE ====================
     return (
         <div className="min-h-screen bg-gradient-to-r from-zinc-800 to-gray-700 py-12 px-4 md:px-8">
-            <div className="max-w-7xl mx-auto space-y-12">
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="max-w-7xl mx-auto space-y-12"
+            >
                 <h1 className="text-4xl font-bold text-white text-center mb-6">
                     {isShopOwner ? "Shop Owner Dashboard" : "Buyer Dashboard"}
                 </h1>
 
                 {/* Profile Card & Info */}
-                <div className="bg-white/10 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl max-w-4xl mx-auto">
+                <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    className="bg-white/10 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl max-w-4xl mx-auto"
+                >
                     <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
                         {/* Avatar Column */}
                         <div className="flex flex-col items-center">
@@ -338,11 +350,16 @@ const ProfilePage = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
                 {/* PRODUCT MANAGEMENT SECTION (SHOP OWNER ONLY) */}
                 {isShopOwner && (
-                    <div className="bg-white/10 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl space-y-6">
+                    <motion.div 
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="bg-white/10 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl space-y-6"
+                    >
                         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
                             <div>
                                 <h2 className="text-2xl font-bold text-white">Manage Tile Products</h2>
@@ -418,9 +435,9 @@ const ProfilePage = () => {
                                 )}
                             </div>
                         )}
-                    </div>
+                    </motion.div>
                 )}
-            </div>
+            </motion.div>
 
             {/* ADD/EDIT TILE MODAL (SHOP OWNER ONLY) */}
             {showTileModal && (

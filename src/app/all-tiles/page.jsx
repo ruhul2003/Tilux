@@ -3,12 +3,33 @@
 import React, { useEffect, useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
+
 
 const AllTiles = () => {
     const [tiles, setTiles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
+
+    const containerVariants = {
+        hidden: {},
+        visible: {
+            transition: {
+                staggerChildren: 0.08
+            }
+        }
+    };
+
+    const cardVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { 
+            opacity: 1, 
+            y: 0, 
+            transition: { duration: 0.5, ease: "easeOut" } 
+        }
+    };
+
 
     useEffect(() => {
         const getTiles = async () => {
@@ -122,11 +143,19 @@ const AllTiles = () => {
             )}
 
             {!loading && !error && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                <motion.div 
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto"
+                >
                     {filteredTiles.length > 0 ? (
                         filteredTiles.map((tile) => (
-                            <div
+                            <motion.div
                                 key={tile.id}
+                                variants={cardVariants}
+                                whileHover={{ y: -6 }}
+                                transition={{ duration: 0.3 }}
                                 className="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-2xl shadow-xl overflow-hidden flex flex-col transition hover:bg-white/10 hover:shadow-2xl"
                             >
                                 <div className="relative w-full h-44 overflow-hidden">
@@ -166,7 +195,7 @@ const AllTiles = () => {
                                         </button>
                                     </Link>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))
                     ) : (
                         <div className="col-span-full text-center py-20">
@@ -179,7 +208,7 @@ const AllTiles = () => {
                             </button>
                         </div>
                     )}
-                </div>
+                </motion.div>
             )}
         </div>
     );

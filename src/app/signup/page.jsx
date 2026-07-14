@@ -7,6 +7,8 @@ import { authClient } from "@/lib/auth-client";
 import { FcGoogle } from "react-icons/fc";
 import { useRouter } from "next/navigation";
 import { toast, Toaster } from "react-hot-toast";
+import { motion } from "framer-motion";
+
 
 const SignUpPage = () => {
     const router = useRouter();
@@ -59,7 +61,12 @@ const SignUpPage = () => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-zinc-800 to-gray-700 px-4 py-10">
 
-            <div className="w-full max-w-5xl rounded-3xl border border-white/10 bg-white/10 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.35)] p-8 md:p-10">
+            <motion.div 
+                initial={{ opacity: 0, y: 30, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="w-full max-w-5xl rounded-3xl border border-white/10 bg-white/10 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.35)] p-8 md:p-10"
+            >
 
                 <div className="text-center mb-10">
                     <h1 className="text-3xl font-bold text-white">Create Account</h1>
@@ -209,7 +216,7 @@ const SignUpPage = () => {
                         Login
                     </Link>
                 </p>
-            </div>
+            </motion.div>
 
             <Toaster position="top-center" />
         </div>

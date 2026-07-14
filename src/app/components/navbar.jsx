@@ -45,12 +45,12 @@ const NavBar = () => {
         }
     };
 
-    const profileImageUrl = session?.user?.image || 
+    const profileImageUrl = session?.user?.image ||
         `https://ui-avatars.com/api/?name=${encodeURIComponent(session?.user?.name || "User")}&background=FFD700&color=000000&size=128`;
 
     return (
         <>
-            <header className="w-full bg-gradient-to-r from-zinc-800 to-gray-700 pt-3 px-2 lg:px-8 sticky top-0 z-50">
+            <header className="w-full pb-5 bg-gradient-to-r from-zinc-800 to-gray-700 pt-3 px-2 lg:px-8 sticky top-0 z-50">
                 <nav className="max-w-7xl mx-auto flex items-center justify-between px-5 lg:px-10 py-3 lg:py-4 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl shadow-lg">
 
                     {/* ================= LEFT SIDE: LOGO ================= */}
@@ -103,11 +103,9 @@ const NavBar = () => {
                                             className="flex items-center gap-2 cursor-pointer"
                                         >
                                             <div className="w-9 h-9 rounded-full overflow-hidden border border-white/20">
-                                                <Image
+                                                <img
                                                     src={profileImageUrl}
                                                     alt={session.user.name || "User"}
-                                                    width={36}
-                                                    height={36}
                                                     className="w-full h-full object-cover"
                                                 />
                                             </div>
@@ -173,14 +171,14 @@ const NavBar = () => {
                                         {/* MOBILE AUTH: Only shows inside menu when logged out */}
                                         {!session?.user && !isPending && (
                                             <div className="pt-4 mt-2 border-t border-white/10 flex flex-col gap-3">
-                                                <Link 
-                                                    href="/login" 
+                                                <Link
+                                                    href="/login"
                                                     className="w-full text-center py-3 rounded-xl bg-white/10 text-white font-medium hover:bg-white/20 transition"
                                                 >
                                                     Login
                                                 </Link>
-                                                <Link 
-                                                    href="/signup" 
+                                                <Link
+                                                    href="/signup"
                                                     className="w-full text-center py-3 rounded-xl bg-[#FFD700] text-black font-bold hover:bg-yellow-400 transition"
                                                 >
                                                     Sign Up

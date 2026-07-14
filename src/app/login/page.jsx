@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
+import { motion } from "framer-motion";
+
 
 const LoginPage = () => {
     const router = useRouter();
@@ -51,7 +53,12 @@ const LoginPage = () => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-zinc-800 to-gray-700 px-4">
 
-            <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/10 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.35)] p-8">
+            <motion.div 
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="w-full max-w-md rounded-3xl border border-white/10 bg-white/10 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.35)] p-8"
+            >
 
                 <div className="text-center mb-8">
                     <h1 className="text-3xl font-bold text-white">
@@ -139,7 +146,7 @@ const LoginPage = () => {
                     </Link>
                 </p>
 
-            </div>
+            </motion.div>
         </div>
     );
 };

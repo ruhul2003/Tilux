@@ -9,6 +9,8 @@ import Marquee from "react-fast-marquee";
 import { useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { IoClose } from "react-icons/io5";
+import { motion } from "framer-motion";
+
 
 const Banner = () => {
     const { data: session } = useSession();
@@ -66,8 +68,50 @@ const Banner = () => {
         }
     };
 
+    // Motion variants
+    const heroVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+    };
+
+    const containerVariants = {
+        hidden: {},
+        visible: {
+            transition: {
+                staggerChildren: 0.15
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, scale: 0.9 },
+        visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" } }
+    };
+
+    const productGridVariants = {
+        hidden: {},
+        visible: {
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    };
+
+    const productCardVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+    };
+
     return (
-        <div className="bg-gradient-to-r from-zinc-800 to-gray-700 flex flex-col items-center text-center px-4 md:px-6 pb-20 overflow-hidden relative">
+        <div 
+            className="flex flex-col items-center text-center px-4 md:px-6 pb-20 overflow-hidden relative"
+            style={{
+                backgroundImage: "linear-gradient(to right, rgba(24, 24, 27, 0.95), rgba(39, 39, 42, 0.9)), url('/marble-bg.png')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundAttachment: "fixed"
+            }}
+        >
             
             {/* ================= REDIRECT LOADING OVERLAY ================= */}
             {isRedirecting && (
@@ -86,35 +130,64 @@ const Banner = () => {
 
             {/* ================= HERO SECTION ================= */}
             <div className="min-h-[70vh] md:min-h-[85vh] text-center flex flex-col justify-center items-center w-full max-w-7xl">
-                <p className="flex items-center gap-2 font-semibold text-xs md:text-sm rounded-full bg-[#2F2F2F] px-4 py-2 text-white w-fit mt-8 animate-fade-in">
+                <motion.p 
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className="flex items-center gap-2 font-semibold text-xs md:text-sm rounded-full bg-[#2F2F2F] px-4 py-2 text-white w-fit mt-8"
+                >
                     <IoMdRadioButtonOn className="text-[#FFD700]" />
                     Built On Quality And Trust
-                </p>
+                </motion.p>
 
-                <h1 className="text-white mt-6 text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-tight max-w-5xl">
+                <motion.h1 
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.1 }}
+                    className="text-white mt-6 text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-tight max-w-5xl"
+                >
                     Discover Your{" "}
                     <span className="text-[#FFD700]">Perfect Aesthetic</span>
-                </h1>
+                </motion.h1>
 
-                <p className="text-base md:text-lg text-gray-300 mt-5 max-w-2xl leading-relaxed">
+                <motion.p 
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="text-base md:text-lg text-gray-300 mt-5 max-w-2xl leading-relaxed"
+                >
                     We manufacture high-quality natural marble using advanced processing technology to deliver timeless beauty and strength.
-                </p>
+                </motion.p>
 
-                <ul className="flex flex-wrap justify-center gap-3 md:gap-4 mt-8">
+                <motion.ul 
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="flex flex-wrap justify-center gap-3 md:gap-4 mt-8"
+                >
                     {["Premium Marble Quality", "Modern Elegant Designs"].map((feature, i) => (
-                        <li key={i} className="flex items-center gap-2 font-medium text-xs md:text-sm rounded-full bg-white/10 backdrop-blur-md px-4 py-2 text-white border border-white/10">
+                        <motion.li 
+                            key={i} 
+                            variants={itemVariants}
+                            className="flex items-center gap-2 font-medium text-xs md:text-sm rounded-full bg-white/10 backdrop-blur-md px-4 py-2 text-white border border-white/10"
+                        >
                             <FaCheckCircle className="text-[#FFD700]" />
                             {feature}
-                        </li>
+                        </motion.li>
                     ))}
-                </ul>
+                </motion.ul>
 
-                <button
+                <motion.button
                     onClick={handleProtectedNavigation}
-                    className="bg-white text-black mt-10 rounded-full font-bold text-base md:text-lg px-8 md:px-10 py-3 md:py-4 hover:bg-[#FFD700] hover:scale-105 transition-all duration-300 shadow-lg cursor-pointer"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    whileHover={{ scale: 1.05, backgroundColor: "#FFD700", color: "#000" }}
+                    whileTap={{ scale: 0.95 }}
+                    className="bg-white text-black mt-10 rounded-full font-bold text-base md:text-lg px-8 md:px-10 py-3 md:py-4 transition-all duration-300 shadow-lg cursor-pointer"
                 >
                     Browse Now
-                </button>
+                </motion.button>
 
                 {/* ================= MARQUEE ================= */}
                 {!loading && !error && tiles.length > 0 && (
@@ -135,16 +208,26 @@ const Banner = () => {
             {/* ================= PRODUCT SECTION ================= */}
             <div className="w-full max-w-7xl px-2">
                 <div className="flex flex-col md:flex-row justify-between items-end mt-20 mb-10 gap-4">
-                    <div className="text-left">
+                    <motion.div 
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="text-left"
+                    >
                         <h2 className="text-white text-3xl md:text-5xl font-bold">Featured Products</h2>
                         <div className="h-1.5 w-20 bg-[#FFD700] mt-4 rounded-full"></div>
-                    </div>
-                    <button
+                    </motion.div>
+                    <motion.button
                         onClick={handleProtectedNavigation}
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
                         className="text-gray-300 hover:text-[#FFD700] text-sm font-medium transition cursor-pointer"
                     >
                         View All Collection &rarr;
-                    </button>
+                    </motion.button>
                 </div>
 
                 {loading && (
@@ -160,9 +243,21 @@ const Banner = () => {
                 )}
 
                 {!loading && !error && (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    <motion.div 
+                        variants={productGridVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-50px" }}
+                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
+                    >
                         {tiles.slice(0, 4).map((tile) => (
-                            <div key={tile.id} className="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-2xl shadow-xl overflow-hidden text-left flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20">
+                            <motion.div 
+                                key={tile.id} 
+                                variants={productCardVariants}
+                                whileHover={{ y: -8 }}
+                                transition={{ duration: 0.3 }}
+                                className="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-2xl shadow-xl overflow-hidden text-left flex flex-col transition-all duration-500 hover:bg-white/10 hover:border-white/20"
+                            >
                                 <div className="relative w-full h-56 overflow-hidden">
                                     <Image
                                         src={tile.image}
@@ -191,9 +286,9 @@ const Banner = () => {
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
-                    </div>
+                    </motion.div>
                 )}
             </div>
 
