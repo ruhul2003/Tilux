@@ -109,6 +109,26 @@ export const authClient = {
                 notifyListeners();
                 return { error: err };
             }
+        },
+        social: async ({ provider = "google", callbackURL = "/" }) => {
+            try {
+                const res = await fetch(`/api/auth/sign-in/social`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ provider, callbackURL })
+                });
+                const data = await res.json();
+                if (data.url) {
+                    window.location.href = data.url;
+                    return { data };
+                } else if (data.redirect) {
+                    window.location.href = data.redirect;
+                    return { data };
+                }
+                window.location.href = `/api/auth/sign-in/social?provider=${provider}&callbackURL=${encodeURIComponent(callbackURL)}`;
+            } catch (err) {
+                window.location.href = `/api/auth/sign-in/social?provider=${provider}&callbackURL=${encodeURIComponent(callbackURL)}`;
+            }
         }
     },
     signOut: async () => {
