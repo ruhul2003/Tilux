@@ -4,6 +4,7 @@ import Features from "./components/features";
 import Showcase from "./components/showcase";
 import Testimonials from "./components/testimonials";
 import TileCalculator from "./components/tile-calculator";
+import FAQNewsletter from "./components/faq-newsletter";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <TileCalculator />
       <Features />
       <Testimonials />
+      <FAQNewsletter />
     </div>
   );
 }
