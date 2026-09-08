@@ -1,229 +1,143 @@
-import { FaInstagram } from "react-icons/fa6";
-import { FaFacebook } from "react-icons/fa";
+"use client";
+
+import React from "react";
+import Link from "next/link";
+import { FaInstagram, FaFacebook, FaArrowUp } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
 
 function Footer() {
+    const scrollToTop = () => {
+        if (typeof window !== "undefined") {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    };
+
     return (
-        <div className="bg-[#101727] text-white">
-
-            <div className="w-full md:w-4/5 mx-auto px-6 py-16">
-
+        <footer className="bg-gradient-to-b from-zinc-900 to-black text-white relative border-t border-zinc-800/80">
+            <div className="max-w-7xl mx-auto px-6 py-16">
                 {/* TOP GRID */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 lg:gap-8 mb-12">
-
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10 lg:gap-8 mb-12">
                     {/* BRAND */}
                     <div className="sm:col-span-2 md:col-span-3 lg:col-span-2">
+                        <Link href="/" className="text-3xl font-extrabold text-white tracking-wider flex items-center gap-2">
+                            <span className="bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent">TILUX</span>
+                            <span className="text-xs px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase font-semibold">Premium</span>
+                        </Link>
 
-                        <h1 className="text-3xl md:text-4xl font-bold">
-                            Tilux
-                        </h1>
-
-                        <p className="text-[#777] mt-4 leading-relaxed max-w-sm">
-                            We manufacture high-quality natural marble using advanced processing technology to deliver timeless beauty, strength, and precision for residential and commercial spaces.
+                        <p className="text-gray-400 mt-4 text-sm leading-relaxed max-w-sm">
+                            We manufacture and curate high-grade porcelain, ceramic, and natural marble tiles using advanced precision technology for modern residential and architectural projects.
                         </p>
+
                         {/* SOCIAL LINKS */}
                         <div className="mt-6">
-
-                            <h2 className="text-[16px] font-semibold mb-4">
-                                Follow Us
+                            <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">
+                                Connect With Us
                             </h2>
-
-                            <div className="flex flex-row gap-4">
-
-                                <FaInstagram
-                                    size={38}
-                                    className="text-black bg-white p-2 rounded-full hover:bg-purple-600 hover:text-white transition-all cursor-pointer"
-                                />
-
-                                <FaFacebook
-                                    size={38}
-                                    className="text-black bg-white p-2 rounded-full hover:bg-blue-600 hover:text-white transition-all cursor-pointer"
-                                />
-
-                                <FaXTwitter
-                                    size={38}
-                                    className="text-black bg-white p-2 rounded-full hover:bg-gray-800 hover:text-white transition-all cursor-pointer"
-                                />
+                            <div className="flex flex-row gap-3">
+                                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-xl bg-zinc-800 border border-zinc-700 text-gray-300 hover:text-amber-400 hover:border-amber-400/50 transition">
+                                    <FaInstagram className="w-5 h-5" />
+                                </a>
+                                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-xl bg-zinc-800 border border-zinc-700 text-gray-300 hover:text-amber-400 hover:border-amber-400/50 transition">
+                                    <FaFacebook className="w-5 h-5" />
+                                </a>
+                                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-xl bg-zinc-800 border border-zinc-700 text-gray-300 hover:text-amber-400 hover:border-amber-400/50 transition">
+                                    <FaXTwitter className="w-5 h-5" />
+                                </a>
                             </div>
                         </div>
                     </div>
 
-                    {/* PRODUCTS */}
+                    {/* QUICK LINKS */}
                     <div>
-                        <h1 className="text-[18px] font-semibold">
-                            Products
-                        </h1>
+                        <h3 className="text-sm font-bold text-amber-400 uppercase tracking-wider mb-4">
+                            Catalog
+                        </h3>
+                        <ul className="text-gray-400 text-sm space-y-2.5">
+                            <li><Link href="/all-tiles" className="hover:text-white transition">All Tiles</Link></li>
+                            <li><Link href="/all-tiles" className="hover:text-white transition">Marble Series</Link></li>
+                            <li><Link href="/all-tiles" className="hover:text-white transition">Ceramic Collection</Link></li>
+                            <li><Link href="/all-tiles" className="hover:text-white transition">Outdoor Pavers</Link></li>
+                        </ul>
+                    </div>
 
-                        <ul className="text-[#777] mt-3 flex flex-col gap-2">
-
-                            <li className="hover:text-white cursor-pointer transition-colors">
-                                Features
-                            </li>
-
-                            <li className="hover:text-white cursor-pointer transition-colors">
-                                Pricing
-                            </li>
-
-                            <li className="hover:text-white cursor-pointer transition-colors">
-                                Templates
-                            </li>
-
-                            <li className="hover:text-white cursor-pointer transition-colors">
-                                Integrations
-                            </li>
+                    {/* ACCOUNT */}
+                    <div>
+                        <h3 className="text-sm font-bold text-amber-400 uppercase tracking-wider mb-4">
+                            Account
+                        </h3>
+                        <ul className="text-gray-400 text-sm space-y-2.5">
+                            <li><Link href="/profile" className="hover:text-white transition">My Profile</Link></li>
+                            <li><Link href="/my-orders" className="hover:text-white transition">My Orders</Link></li>
+                            <li><Link href="/manage-orders" className="hover:text-white transition">Shop Owner Portal</Link></li>
+                            <li><Link href="/login" className="hover:text-white transition">Sign In</Link></li>
                         </ul>
                     </div>
 
                     {/* COMPANY */}
                     <div>
-                        <h1 className="text-[18px] font-semibold">
+                        <h3 className="text-sm font-bold text-amber-400 uppercase tracking-wider mb-4">
                             Company
-                        </h1>
-
-                        <ul className="text-[#777] mt-3 flex flex-col gap-2">
-
-                            <li className="hover:text-white cursor-pointer transition-colors">
-                                About
-                            </li>
-
-                            <li className="hover:text-white cursor-pointer transition-colors">
-                                Blog
-                            </li>
-
-                            <li className="hover:text-white cursor-pointer transition-colors">
-                                Careers
-                            </li>
-
-                            <li className="hover:text-white cursor-pointer transition-colors">
-                                Press
-                            </li>
+                        </h3>
+                        <ul className="text-gray-400 text-sm space-y-2.5">
+                            <li><span className="hover:text-white cursor-pointer transition">About Us</span></li>
+                            <li><span className="hover:text-white cursor-pointer transition">Careers</span></li>
+                            <li><span className="hover:text-white cursor-pointer transition">Press & Media</span></li>
+                            <li><span className="hover:text-white cursor-pointer transition">Privacy Policy</span></li>
                         </ul>
                     </div>
 
-                    {/* RESOURCES */}
+                    {/* CONTACT INFO */}
                     <div>
-                        <h1 className="text-[18px] font-semibold">
-                            Resources
-                        </h1>
-
-                        <ul className="text-[#777] mt-3 flex flex-col gap-2">
-
-                            <li className="hover:text-white cursor-pointer transition-colors">
-                                Documentation
-                            </li>
-
-                            <li className="hover:text-white cursor-pointer transition-colors">
-                                Help Center
-                            </li>
-
-                            <li className="hover:text-white cursor-pointer transition-colors">
-                                Community
-                            </li>
-
-                            <li className="hover:text-white cursor-pointer transition-colors">
-                                Contact
-                            </li>
-                        </ul>
-                    </div>
-
-
-                    <div>
-                        <h1 className="text-[18px] font-semibold">
-                            Contact Us
-                        </h1>
-
-                        <div className="mt-4 flex flex-col gap-4 text-[#777] text-sm">
-
-
-                            <div className="flex items-start gap-3">
-
-                                <MdEmail
-                                    size={20}
-                                    className="text-[#FFD700] mt-0.5"
-                                />
-
+                        <h3 className="text-sm font-bold text-amber-400 uppercase tracking-wider mb-4">
+                            Contact
+                        </h3>
+                        <div className="space-y-3 text-xs text-gray-400">
+                            <div className="flex items-start gap-2.5">
+                                <MdEmail className="text-amber-400 w-4 h-4 mt-0.5 flex-shrink-0" />
                                 <div>
-                                    <p className="text-white font-medium">
-                                        Email
-                                    </p>
-
-                                    <p className="hover:text-white transition-colors cursor-pointer">
-                                        support@tilux.com
-                                    </p>
+                                    <span className="text-white font-medium block">Support Email</span>
+                                    <span>support@tilux.com</span>
                                 </div>
                             </div>
-
-                            {/* PHONE */}
-                            <div className="flex items-start gap-3">
-
-                                <MdPhone
-                                    size={20}
-                                    className="text-[#FFD700] mt-0.5"
-                                />
-
+                            <div className="flex items-start gap-2.5">
+                                <MdPhone className="text-amber-400 w-4 h-4 mt-0.5 flex-shrink-0" />
                                 <div>
-                                    <p className="text-white font-medium">
-                                        Phone
-                                    </p>
-
-                                    <p className="hover:text-white transition-colors cursor-pointer">
-                                        +880 1234-567890
-                                    </p>
+                                    <span className="text-white font-medium block">Phone Helpline</span>
+                                    <span>+880 1234-567890</span>
                                 </div>
                             </div>
-
-                            {/* LOCATION */}
-                            <div className="flex items-start gap-3">
-
-                                <MdLocationOn
-                                    size={20}
-                                    className="text-[#FFD700] mt-0.5"
-                                />
-
+                            <div className="flex items-start gap-2.5">
+                                <MdLocationOn className="text-amber-400 w-4 h-4 mt-0.5 flex-shrink-0" />
                                 <div>
-                                    <p className="text-white font-medium">
-                                        Location
-                                    </p>
-
-                                    <p>
-                                        Dhaka, Bangladesh
-                                    </p>
+                                    <span className="text-white font-medium block">HQ Address</span>
+                                    <span>Dhaka, Bangladesh</span>
                                 </div>
                             </div>
                         </div>
-
-                        
                     </div>
                 </div>
 
                 {/* DIVIDER */}
-                <hr className="border-[#333]" />
+                <hr className="border-zinc-800" />
 
-                {/* BOTTOM */}
-                <div className="flex flex-col md:flex-row justify-between items-center gap-6 mt-8">
-
-                    <div className="text-center md:text-left text-[#777] text-sm">
-                        © 2026 Tilux Inc. All rights reserved.
+                {/* BOTTOM BAR */}
+                <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8">
+                    <div className="text-gray-500 text-xs text-center sm:text-left">
+                        © 2026 Tilux Inc. All rights reserved. Crafted for modern architecture.
                     </div>
 
-                    <div className="flex flex-wrap justify-center gap-6 md:gap-10 items-center text-sm text-[#777]">
-
-                        <p className="hover:text-white cursor-pointer transition-colors">
-                            Privacy Policy
-                        </p>
-
-                        <p className="hover:text-white cursor-pointer transition-colors">
-                            Terms of Service
-                        </p>
-
-                        <p className="hover:text-white cursor-pointer transition-colors">
-                            Cookies
-                        </p>
-                    </div>
+                    {/* Back to Top Button */}
+                    <button
+                        onClick={scrollToTop}
+                        className="flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-xl bg-zinc-800 hover:bg-amber-500 hover:text-black border border-zinc-700 transition text-gray-300"
+                    >
+                        <span>Back to top</span>
+                        <FaArrowUp className="w-3 h-3" />
+                    </button>
                 </div>
             </div>
-        </div>
+        </footer>
     );
 }
 
