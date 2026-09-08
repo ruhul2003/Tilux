@@ -5,12 +5,14 @@ import Showcase from "./components/showcase";
 import Testimonials from "./components/testimonials";
 import TileCalculator from "./components/tile-calculator";
 import FAQNewsletter from "./components/faq-newsletter";
+import RoomVisualizer from "./components/room-visualizer";
 
 export default function Home() {
   return (
     <div className="flex flex-col">
       <Banner />
       <Showcase />
+      <RoomVisualizer />
       <TileCalculator />
       <Features />
       <Testimonials />
