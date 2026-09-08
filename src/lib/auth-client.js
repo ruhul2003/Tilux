@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 
 // The base API URL for our Express backend
-const API_URL = "http://localhost:5000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
 // Simple pub/sub pattern to trigger React state updates across hooks
 const listeners = new Set();

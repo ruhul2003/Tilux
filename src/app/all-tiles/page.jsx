@@ -35,7 +35,7 @@ const AllTiles = () => {
         const getTiles = async () => {
             try {
                 setLoading(true);
-                const res = await fetch("http://localhost:5000/api/tiles", {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/tiles`, {
                     cache: "no-store",
                 });
 

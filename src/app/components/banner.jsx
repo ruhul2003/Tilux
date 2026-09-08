@@ -29,7 +29,7 @@ const Banner = () => {
             try {
                 setLoading(true);
                 const res = await fetch(
-                    "http://localhost:5000/api/tiles",
+                    `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/tiles`,
                     { cache: "no-store" }
                 );
 

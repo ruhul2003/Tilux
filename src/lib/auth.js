@@ -4,14 +4,16 @@ import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import dns from "node:dns";
 
 
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
+try {
+  dns.setServers(["8.8.8.8", "8.8.4.4"]);
+} catch (err) {
+  // Ignore custom DNS server setting on restricted serverless environments like Vercel
+}
 
-
-const client = new MongoClient(process.env.MONGO_URI);
-
+const mongoUri = process.env.MONGO_URI || "mongodb://localhost:27017";
+const client = new MongoClient(mongoUri);
 
 await client.connect();
-
 
 const db = client.db("sample_mflix");
 

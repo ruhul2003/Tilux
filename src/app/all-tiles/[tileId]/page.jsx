@@ -37,7 +37,7 @@ const TileDetails = ({ params: paramsPromise }) => {
                 setLoading(true);
 
                 const res = await fetch(
-                    `http://localhost:5000/api/tiles/${tileId}`
+                    `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/tiles/${tileId}`
                 );
 
                 if (!res.ok) {
