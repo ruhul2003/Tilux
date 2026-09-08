@@ -33,13 +33,13 @@ const SignUpPage = () => {
                 return;
             }
 
-            toast.success("Account created successfully! Please login.", { 
-                duration: 5000 
+            toast.success("Account created successfully!", { 
+                duration: 3000 
             });
 
             setTimeout(() => {
-                router.push("/login");
-            }, 1500);
+                router.push("/");
+            }, 1000);
 
         } catch (error) {
             console.error("Signup error:", error);

@@ -68,6 +68,8 @@ export const authClient = {
     signUp: {
         email: async ({ name, email, password, image, role }) => {
             try {
+                currentPending = true;
+                notifyListeners();
                 const res = await fetch(`${API_URL}/api/auth/signup`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -75,10 +77,20 @@ export const authClient = {
                 });
                 const data = await res.json();
                 if (!res.ok) {
+                    currentPending = false;
+                    notifyListeners();
                     return { error: new Error(data.message || "Failed to sign up") };
                 }
+                if (data.token) {
+                    localStorage.setItem("tilux_token", data.token);
+                    currentSession = { user: data.user };
+                }
+                currentPending = false;
+                notifyListeners();
                 return { data };
             } catch (err) {
+                currentPending = false;
+                notifyListeners();
                 return { error: err };
             }
         }
