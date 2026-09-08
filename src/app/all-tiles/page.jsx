@@ -4,6 +4,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { API_BASE_URL } from "@/lib/auth-client";
 
 
 const AllTiles = () => {
@@ -35,7 +36,7 @@ const AllTiles = () => {
         const getTiles = async () => {
             try {
                 setLoading(true);
-                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/tiles`, {
+                const res = await fetch(`${API_BASE_URL}/api/tiles`, {
                     cache: "no-store",
                 });
 

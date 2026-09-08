@@ -6,7 +6,7 @@ import { IoMdRadioButtonOn } from "react-icons/io";
 import { FaCheckCircle } from "react-icons/fa";
 import Image from "next/image";
 import Marquee from "react-fast-marquee";
-import { useSession } from "@/lib/auth-client";
+import { useSession, API_BASE_URL } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { IoClose } from "react-icons/io5";
 import { motion } from "framer-motion";
@@ -29,7 +29,7 @@ const Banner = () => {
             try {
                 setLoading(true);
                 const res = await fetch(
-                    `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/tiles`,
+                    `${API_BASE_URL}/api/tiles`,
                     { cache: "no-store" }
                 );
 

@@ -2,8 +2,15 @@
 
 import { useState, useEffect } from "react";
 
-// The base API URL for our Express backend
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const getApiUrl = () => {
+    if (process.env.NEXT_PUBLIC_API_URL) return process.env.NEXT_PUBLIC_API_URL;
+    if (typeof window !== "undefined" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+        return "https://tilux-server-omega.vercel.app";
+    }
+    return "http://localhost:5000";
+};
+
+const API_URL = getApiUrl();
 
 // Simple pub/sub pattern to trigger React state updates across hooks
 const listeners = new Set();
@@ -32,7 +39,7 @@ export const fetchProfile = async () => {
         if (res.ok) {
             const userData = await res.json();
             currentSession = { user: userData };
-        } else {
+        } else if (res.status === 401 || res.status === 403) {
             localStorage.removeItem("tilux_token");
             currentSession = null;
         }
@@ -54,8 +61,11 @@ export const useSession = () => {
 
     useEffect(() => {
         listeners.add(setState);
-        // Push initial state
-        setState({ data: currentSession, isPending: currentPending });
+        if (typeof window !== "undefined" && localStorage.getItem("tilux_token") && !currentSession) {
+            fetchProfile();
+        } else {
+            setState({ data: currentSession, isPending: currentPending });
+        }
         return () => {
             listeners.delete(setState);
         };
