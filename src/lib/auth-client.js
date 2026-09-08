@@ -23,32 +23,51 @@ const notifyListeners = () => {
 
 export const fetchProfile = async () => {
     if (typeof window === "undefined") return;
+
+    // 1. Try Express JWT token from localStorage
     const token = localStorage.getItem("tilux_token");
-    if (!token) {
-        currentSession = null;
-        currentPending = false;
-        notifyListeners();
-        return;
-    }
-    try {
-        const res = await fetch(`${API_URL}/api/auth/profile`, {
-            headers: {
-                "Authorization": `Bearer ${token}`
+    if (token) {
+        try {
+            const res = await fetch(`${API_URL}/api/auth/profile`, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+            if (res.ok) {
+                const userData = await res.json();
+                currentSession = { user: userData };
+                currentPending = false;
+                notifyListeners();
+                return;
+            } else if (res.status === 401 || res.status === 403) {
+                localStorage.removeItem("tilux_token");
             }
+        } catch (err) {
+            console.error("Error fetching Express session:", err);
+        }
+    }
+
+    // 2. Try Better-Auth Google OAuth session cookie
+    try {
+        const res = await fetch(`/api/auth/get-session`, {
+            credentials: "include"
         });
         if (res.ok) {
-            const userData = await res.json();
-            currentSession = { user: userData };
-        } else if (res.status === 401 || res.status === 403) {
-            localStorage.removeItem("tilux_token");
-            currentSession = null;
+            const data = await res.json();
+            if (data?.user) {
+                currentSession = { user: data.user };
+                currentPending = false;
+                notifyListeners();
+                return;
+            }
         }
     } catch (err) {
-        console.error("Error fetching session:", err);
-    } finally {
-        currentPending = false;
-        notifyListeners();
+        console.error("Error fetching Better-Auth session:", err);
     }
+
+    currentSession = null;
+    currentPending = false;
+    notifyListeners();
 };
 
 // Start fetching session on startup if in browser
@@ -61,11 +80,7 @@ export const useSession = () => {
 
     useEffect(() => {
         listeners.add(setState);
-        if (typeof window !== "undefined" && localStorage.getItem("tilux_token") && !currentSession) {
-            fetchProfile();
-        } else {
-            setState({ data: currentSession, isPending: currentPending });
-        }
+        fetchProfile();
         return () => {
             listeners.delete(setState);
         };
@@ -155,6 +170,14 @@ export const authClient = {
     },
     signOut: async () => {
         localStorage.removeItem("tilux_token");
+        try {
+            await fetch(`/api/auth/sign-out`, {
+                method: "POST",
+                credentials: "include"
+            });
+        } catch (err) {
+            // Ignore sign out fetch errors
+        }
         currentSession = null;
         notifyListeners();
         return {};
