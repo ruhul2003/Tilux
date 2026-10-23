@@ -223,40 +223,45 @@ const Banner = () => {
             </div>
 
             {/* ================= PRODUCT SECTION ================= */}
-            <div className="w-full max-w-7xl px-2">
-                <div className="flex flex-col md:flex-row justify-between items-end mt-20 mb-10 gap-4">
+            <div className="w-full max-w-[1600px] px-2 sm:px-4 lg:px-8 mt-24">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
                     <motion.div 
-                        initial={{ opacity: 0, x: -30 }}
+                        initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                         className="text-left"
                     >
-                        <h2 className="text-white text-3xl md:text-5xl font-bold">Featured Products</h2>
-                        <div className="h-1.5 w-20 bg-[#FFD700] mt-4 rounded-full"></div>
+                        <span className="text-amber-400 text-xs font-semibold tracking-[0.2em] uppercase">
+                            Curated Catalog
+                        </span>
+                        <h2 className="text-white text-3xl md:text-5xl font-light tracking-tight mt-1.5">
+                            Featured Surfaces
+                        </h2>
                     </motion.div>
                     <motion.button
                         onClick={handleProtectedNavigation}
-                        initial={{ opacity: 0, x: 30 }}
+                        initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="text-gray-300 hover:text-[#FFD700] text-sm font-medium transition cursor-pointer"
+                        className="text-xs font-medium tracking-wider uppercase text-zinc-400 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5"
                     >
-                        View All Collection &rarr;
+                        <span>Full Collection</span>
+                        <span>&rarr;</span>
                     </motion.button>
                 </div>
 
                 {loading && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {[1, 2, 3, 4].map((n) => (
-                            <div key={n} className="h-80 w-full bg-white/5 animate-pulse rounded-2xl"></div>
+                            <div key={n} className="h-88 w-full bg-white/[0.03] border border-white/[0.06] animate-pulse rounded-2xl"></div>
                         ))}
                     </div>
                 )}
 
                 {error && (
-                    <p className="text-red-400 bg-red-400/10 py-4 px-6 rounded-xl border border-red-400/20">{error}</p>
+                    <p className="text-red-400 bg-red-400/10 py-4 px-6 rounded-xl border border-red-400/20 text-xs">{error}</p>
                 )}
 
                 {!loading && !error && (
@@ -265,41 +270,60 @@ const Banner = () => {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, margin: "-50px" }}
-                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
+                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
                     >
                         {tiles.slice(0, 4).map((tile) => (
                             <motion.div 
                                 key={tile.id} 
                                 variants={productCardVariants}
-                                whileHover={{ y: -8 }}
+                                whileHover={{ y: -6 }}
                                 transition={{ duration: 0.3 }}
-                                className="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-2xl shadow-xl overflow-hidden text-left flex flex-col transition-all duration-500 hover:bg-white/10 hover:border-white/20"
+                                className="group rounded-2xl border border-white/[0.08] bg-[#121215]/80 hover:bg-[#18181c] hover:border-white/20 shadow-lg overflow-hidden text-left flex flex-col transition-all duration-300"
                             >
-                                <div className="relative w-full h-56 overflow-hidden">
+                                <div className="relative w-full h-64 overflow-hidden bg-zinc-950">
                                     <Image
                                         src={tile.image}
                                         alt={tile.title}
                                         fill
                                         sizes="(max-width: 768px) 100vw, 25vw"
-                                        className="object-cover group-hover:scale-110 transition duration-700"
+                                        className="object-cover group-hover:scale-105 transition duration-700 opacity-90 group-hover:opacity-100"
                                     />
+                                    <div className="absolute top-3 left-3">
+                                        <span className={`text-[10px] uppercase tracking-wider font-medium px-2.5 py-1 rounded-full backdrop-blur-md border ${
+                                            tile.inStock 
+                                                ? "text-emerald-300 bg-emerald-950/60 border-emerald-500/30" 
+                                                : "text-zinc-400 bg-zinc-900/70 border-zinc-700/50"
+                                        }`}>
+                                            {tile.inStock ? "In Stock" : "Limited"}
+                                        </span>
+                                    </div>
                                 </div>
 
-                                <div className="p-5 flex-grow flex flex-col text-white">
-                                    <div className="flex justify-between items-start gap-2">
-                                        <h3 className="text-lg font-bold line-clamp-1">{tile.title}</h3>
-                                        <span className="font-bold text-[#FFD700] text-lg">${tile.price}</span>
+                                <div className="p-6 flex-grow flex flex-col justify-between">
+                                    <div>
+                                        <div className="flex justify-between items-baseline gap-2">
+                                            <h3 className="text-base font-semibold text-white tracking-tight line-clamp-1 group-hover:text-amber-200 transition-colors">
+                                                {tile.title}
+                                            </h3>
+                                            <span className="font-semibold text-amber-300 text-base">
+                                                ${tile.price}
+                                            </span>
+                                        </div>
+                                        <p className="text-xs text-zinc-400 mt-2 line-clamp-2 leading-relaxed">
+                                            {tile.description}
+                                        </p>
                                     </div>
-                                    <p className="text-sm text-zinc-400 mt-2 line-clamp-2 flex-grow">{tile.description}</p>
-                                    <div className="mt-5 pt-4 border-t border-white/5 flex justify-between items-center">
-                                        <span className={`text-[10px] uppercase tracking-widest font-bold px-2 py-1 rounded ${tile.inStock ? "text-green-400 bg-green-400/10" : "text-red-400 bg-red-400/10"}`}>
-                                            {tile.inStock ? "Available" : "Sold Out"}
+
+                                    <div className="mt-6 pt-4 border-t border-white/[0.06] flex justify-between items-center">
+                                        <span className="text-[11px] text-zinc-500 uppercase tracking-wider font-light">
+                                            {tile.category || "Porcelain"}
                                         </span>
                                         <button
                                             onClick={() => handleDetailNavigation(tile.id)}
-                                            className="text-xs font-bold hover:text-[#FFD700] transition cursor-pointer"
+                                            className="text-xs font-semibold tracking-wider uppercase text-zinc-300 hover:text-white transition cursor-pointer flex items-center gap-1"
                                         >
-                                            DETAILS
+                                            <span>Details</span>
+                                            <span className="text-amber-400">&rarr;</span>
                                         </button>
                                     </div>
                                 </div>
@@ -311,49 +335,41 @@ const Banner = () => {
 
             {/* ================= LOGIN MODAL ================= */}
             {showLoginModal && (
-                <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-                    <div className="bg-zinc-900 rounded-3xl max-w-md w-full p-8 text-center border border-white/10 relative">
+                <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-[100] flex items-center justify-center p-4">
+                    <div className="bg-[#121215]/95 border border-white/[0.08] rounded-3xl max-w-sm w-full p-7 text-center relative shadow-2xl backdrop-blur-2xl">
                         <button
                             onClick={() => setShowLoginModal(false)}
-                            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition cursor-pointer group"
+                            className="absolute top-4 right-4 w-8 h-8 rounded-full border border-white/10 bg-white/[0.02] hover:bg-white/[0.08] text-zinc-400 hover:text-white flex items-center justify-center transition cursor-pointer text-xs group"
                             aria-label="Close modal"
                         >
-                            <IoClose className="text-2xl group-hover:scale-110 transition-transform" />
+                            <IoClose className="text-base" />
                         </button>
 
-                        <div className="w-20 h-20 mx-auto bg-white/10 rounded-full flex items-center justify-center mb-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7" />
-                            </svg>
+                        <div className="w-11 h-11 mx-auto mb-4 rounded-2xl bg-amber-400/10 border border-amber-400/20 text-amber-400 flex items-center justify-center text-lg">
+                            ✦
                         </div>
 
-                        <h2 className="text-3xl font-bold text-white mb-3">Login Required</h2>
-                        <p className="text-gray-400 mb-8">You need to be logged in to browse our collection.</p>
+                        <h2 className="text-xl font-bold text-white tracking-tight mb-2">Member Access</h2>
+                        <p className="text-xs text-zinc-400 mb-6 leading-relaxed">You need to be logged in to view surface specifications.</p>
 
-                        <div className="flex flex-col gap-3">
+                        <div className="flex flex-col gap-2.5">
                             <button
                                 onClick={() => { setShowLoginModal(false); router.push("/login"); }}
-                                className="bg-[#FFD700] text-black font-bold py-4 rounded-2xl hover:bg-yellow-400 transition"
+                                className="bg-amber-400 hover:bg-amber-300 text-zinc-950 font-semibold py-3 rounded-xl text-xs uppercase tracking-wider transition cursor-pointer shadow-sm"
                             >
-                                Login Now
+                                Sign In Now
                             </button>
                             <button
                                 onClick={() => setShowLoginModal(false)}
-                                className="bg-white/10 text-white font-medium py-4 rounded-2xl hover:bg-white/20 transition"
+                                className="border border-white/10 hover:bg-white/[0.05] text-zinc-400 hover:text-zinc-200 font-medium py-3 rounded-xl text-xs uppercase tracking-wider transition cursor-pointer"
                             >
                                 Cancel
                             </button>
                         </div>
-
-                        <p className="text-sm text-gray-500 mt-6">
-                            Don&apos;t have an account?
-                            <button onClick={() => { setShowLoginModal(false); router.push("/signup"); }} className="text-[#FFD700] hover:underline ml-1">
-                                Sign up
-                            </button>
-                        </p>
                     </div>
                 </div>
             )}
+
         </div>
     );
 };
