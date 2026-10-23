@@ -90,7 +90,7 @@ export default function TileCalculator() {
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor={widthId} className="block text-sm font-medium text-gray-300 mb-2">
+                                    <label htmlFor={widthId} className="block text-xs uppercase tracking-wider text-zinc-400 mb-2">
                                         Room Width (ft)
                                     </label>
                                     <input
@@ -100,15 +100,15 @@ export default function TileCalculator() {
                                         max="200"
                                         value={roomWidth}
                                         onChange={(e) => setRoomWidth(Math.max(1, parseFloat(e.target.value) || 0))}
-                                        className="w-full bg-zinc-800/80 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-400 transition"
+                                        className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400/60 transition"
                                     />
                                 </div>
                             </div>
 
                             {/* Tile Size Selection */}
                             <div>
-                                <label htmlFor={tileSizeId} className="block text-sm font-medium text-gray-300 mb-2">
-                                    Tile Size (Inches)
+                                <label htmlFor={tileSizeId} className="block text-xs uppercase tracking-wider text-zinc-400 mb-2">
+                                    Tile Format (Inches)
                                 </label>
                                 <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
                                     {["6x6", "12x12", "12x24", "24x24", "24x48"].map((size) => (
@@ -116,10 +116,10 @@ export default function TileCalculator() {
                                             key={size}
                                             type="button"
                                             onClick={() => setTileSize(size)}
-                                            className={`py-2.5 px-3 rounded-xl font-medium text-sm border transition text-center ${
+                                            className={`py-2 px-3 rounded-xl font-medium text-xs border transition text-center cursor-pointer ${
                                                 tileSize === size
-                                                    ? "bg-amber-500 text-black border-amber-400 font-bold shadow-lg shadow-amber-500/20"
-                                                    : "bg-zinc-800/60 border-zinc-700/60 text-gray-300 hover:border-gray-500"
+                                                    ? "bg-white text-zinc-950 border-white font-semibold shadow-sm"
+                                                    : "bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:text-white hover:bg-white/[0.05]"
                                             }`}
                                         >
                                             {size}&quot;
@@ -132,8 +132,8 @@ export default function TileCalculator() {
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                                 <div>
                                     <div className="flex justify-between items-center mb-2">
-                                        <span className="text-sm font-medium text-gray-300">Wastage Buffer</span>
-                                        <span className="text-xs font-bold text-amber-400">{wastePercent}%</span>
+                                        <span className="text-xs uppercase tracking-wider text-zinc-400">Offcut Allowance</span>
+                                        <span className="text-xs font-semibold text-amber-300">+{wastePercent}%</span>
                                     </div>
                                     <input
                                         type="range"
@@ -142,17 +142,17 @@ export default function TileCalculator() {
                                         step="5"
                                         value={wastePercent}
                                         onChange={(e) => setWastePercent(parseInt(e.target.value))}
-                                        className="w-full accent-amber-500 cursor-pointer"
+                                        className="w-full accent-amber-400 cursor-pointer"
                                     />
-                                    <span className="text-[11px] text-gray-500 mt-1 block">
-                                        Includes cuts, corners, and spare replacements.
+                                    <span className="text-[11px] text-zinc-500 mt-1 block">
+                                        Accounts for angle cuts, borders, and spares.
                                     </span>
                                 </div>
 
                                 <div>
                                     <div className="flex justify-between items-center mb-2">
-                                        <span className="text-sm font-medium text-gray-300">Est. Price / sq ft</span>
-                                        <span className="text-xs font-bold text-amber-400">${pricePerSqFt}</span>
+                                        <span className="text-xs uppercase tracking-wider text-zinc-400">Rate / Sq Ft ($)</span>
+                                        <span className="text-xs font-semibold text-amber-300">${pricePerSqFt}</span>
                                     </div>
                                     <input
                                         type="number"
@@ -161,7 +161,7 @@ export default function TileCalculator() {
                                         max="100"
                                         value={pricePerSqFt}
                                         onChange={(e) => setPricePerSqFt(Math.max(0.5, parseFloat(e.target.value) || 0))}
-                                        className="w-full bg-zinc-800/80 border border-zinc-700 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400 transition"
+                                        className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-4 py-2 text-white text-sm focus:outline-none focus:border-amber-400/60 transition"
                                     />
                                 </div>
                             </div>
@@ -170,61 +170,61 @@ export default function TileCalculator() {
 
                     {/* Results Panel */}
                     <motion.div
-                        initial={{ opacity: 0, x: 30 }}
+                        initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="lg:col-span-5 bg-gradient-to-br from-amber-500/10 via-zinc-900 to-zinc-950 border border-amber-500/30 rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-2xl relative"
+                        className="lg:col-span-5 bg-[#121215]/80 border border-white/[0.08] rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-2xl relative"
                     >
                         <div>
-                            <div className="flex items-center justify-between border-b border-zinc-800 pb-4 mb-6">
-                                <h4 className="text-lg font-bold text-amber-400 flex items-center gap-2">
-                                    <FaCoins /> Calculation Summary
+                            <div className="flex items-center justify-between border-b border-white/[0.06] pb-4 mb-6">
+                                <h4 className="text-base font-light text-white flex items-center gap-2">
+                                    <FaCoins className="text-amber-400" /> Material Estimate
                                 </h4>
-                                <span className="text-xs px-2.5 py-1 rounded-full bg-amber-400/10 text-amber-300 font-semibold border border-amber-400/20">
-                                    Instant Estimate
+                                <span className="text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-400/10 text-amber-300 font-medium border border-amber-400/20">
+                                    Live Calculation
                                 </span>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4 mb-6">
-                                <div className="bg-zinc-900/90 border border-zinc-800 rounded-2xl p-4">
-                                    <span className="text-xs text-gray-400 block mb-1">Total Room Area</span>
-                                    <span className="text-2xl font-extrabold text-white">{roomArea} <span className="text-sm font-normal text-gray-400">sq ft</span></span>
+                            <div className="grid grid-cols-2 gap-3 mb-6">
+                                <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-4">
+                                    <span className="text-[11px] text-zinc-400 block mb-1">Net Surface Area</span>
+                                    <span className="text-2xl font-light text-white">{roomArea} <span className="text-xs font-normal text-zinc-500">sq ft</span></span>
                                 </div>
-                                <div className="bg-zinc-900/90 border border-zinc-800 rounded-2xl p-4">
-                                    <span className="text-xs text-gray-400 block mb-1">With {wastePercent}% Waste</span>
-                                    <span className="text-2xl font-extrabold text-amber-300">{totalAreaWithWaste.toFixed(1)} <span className="text-sm font-normal text-gray-400">sq ft</span></span>
+                                <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-4">
+                                    <span className="text-[11px] text-zinc-400 block mb-1">With +{wastePercent}% Waste</span>
+                                    <span className="text-2xl font-light text-amber-200">{totalAreaWithWaste.toFixed(1)} <span className="text-xs font-normal text-zinc-500">sq ft</span></span>
                                 </div>
                             </div>
 
-                            <div className="space-y-3 mb-6 text-sm">
-                                <div className="flex justify-between items-center py-2 border-b border-zinc-800/60">
-                                    <span className="text-gray-400 flex items-center gap-2">
-                                        <BiSquareRounded className="text-amber-400" /> Total Tiles Needed:
+                            <div className="space-y-2 mb-6 text-xs">
+                                <div className="flex justify-between items-center py-2 border-b border-white/[0.04]">
+                                    <span className="text-zinc-400 flex items-center gap-2">
+                                        <BiSquareRounded className="text-amber-400" /> Total Slabs / Tiles:
                                     </span>
-                                    <span className="font-bold text-white text-base">{tilesNeeded} pcs</span>
+                                    <span className="font-semibold text-white text-sm">{tilesNeeded} pcs</span>
                                 </div>
 
-                                <div className="flex justify-between items-center py-2 border-b border-zinc-800/60">
-                                    <span className="text-gray-400 flex items-center gap-2">
-                                        <FaLayerGroup className="text-amber-400" /> Boxes Recommended (~10 pcs/box):
+                                <div className="flex justify-between items-center py-2 border-b border-white/[0.04]">
+                                    <span className="text-zinc-400 flex items-center gap-2">
+                                        <FaLayerGroup className="text-amber-400" /> Boxes (~10 pcs/box):
                                     </span>
-                                    <span className="font-bold text-white text-base">{boxesNeeded} boxes</span>
+                                    <span className="font-semibold text-white text-sm">{boxesNeeded} boxes</span>
                                 </div>
 
                                 <div className="flex justify-between items-center py-2">
-                                    <span className="text-gray-400 flex items-center gap-2">
-                                        <FaCheckCircle className="text-green-400" /> Waste Allowance:
+                                    <span className="text-zinc-400 flex items-center gap-2">
+                                        <FaCheckCircle className="text-emerald-400" /> Cutting Allowance:
                                     </span>
-                                    <span className="font-medium text-gray-300">{(totalAreaWithWaste - roomArea).toFixed(1)} sq ft</span>
+                                    <span className="font-medium text-zinc-300">{(totalAreaWithWaste - roomArea).toFixed(1)} sq ft</span>
                                 </div>
                             </div>
                         </div>
 
                         {/* Estimated Price Footer Card */}
-                        <div className="mt-4 p-5 rounded-2xl bg-amber-500/20 border border-amber-500/40 text-center">
-                            <span className="text-xs uppercase tracking-wider text-amber-300 font-semibold block mb-1">Estimated Total Material Cost</span>
-                            <span className="text-4xl font-extrabold text-white">${totalEstimatedCost}</span>
-                            <span className="text-[11px] text-amber-200/70 block mt-1">Excludes installation labor & adhesive materials</span>
+                        <div className="mt-4 p-5 rounded-2xl bg-amber-400/[0.05] border border-amber-400/20 text-center">
+                            <span className="text-[11px] uppercase tracking-wider text-amber-300/80 font-medium block mb-1">Estimated Material Budget</span>
+                            <span className="text-3xl sm:text-4xl font-light text-white tracking-tight">${totalEstimatedCost}</span>
+                            <span className="text-[10px] text-zinc-500 block mt-1">Excludes freight delivery and installation setting materials</span>
                         </div>
                     </motion.div>
                 </div>
@@ -232,3 +232,4 @@ export default function TileCalculator() {
         </section>
     );
 }
+
