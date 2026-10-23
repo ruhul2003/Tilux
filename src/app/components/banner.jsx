@@ -163,31 +163,45 @@ const Banner = () => {
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
-                    className="flex flex-wrap justify-center gap-3 md:gap-4 mt-8"
+                    className="flex flex-wrap justify-center gap-3 mt-8"
                 >
-                    {["Premium Marble Quality", "Modern Elegant Designs"].map((feature, i) => (
+                    {["Direct Italian Quarry Sourcing", "Laser Calibrated Precision", "Carbon Neutral Packaging"].map((feature, i) => (
                         <motion.li 
                             key={i} 
                             variants={itemVariants}
-                            className="flex items-center gap-2 font-medium text-xs md:text-sm rounded-full bg-white/10 backdrop-blur-md px-4 py-2 text-white border border-white/10"
+                            className="flex items-center gap-2 font-normal text-xs rounded-full bg-white/[0.03] border border-white/[0.07] px-4 py-1.5 text-zinc-300 backdrop-blur-sm"
                         >
-                            <FaCheckCircle className="text-[#FFD700]" />
+                            <span className="text-amber-400 text-[10px]">✦</span>
                             {feature}
                         </motion.li>
                     ))}
                 </motion.ul>
 
-                <motion.button
-                    onClick={handleProtectedNavigation}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    whileHover={{ scale: 1.05, backgroundColor: "#FFD700", color: "#000" }}
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-white text-black mt-10 rounded-full font-bold text-base md:text-lg px-8 md:px-10 py-3 md:py-4 transition-all duration-300 shadow-lg cursor-pointer"
-                >
-                    Browse Now
-                </motion.button>
+                <div className="flex flex-wrap items-center justify-center gap-4 mt-10">
+                    <motion.button
+                        onClick={handleProtectedNavigation}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
+                        className="bg-white text-zinc-950 rounded-full font-semibold text-xs sm:text-sm tracking-wide uppercase px-8 py-3.5 hover:bg-amber-300 transition-colors shadow-lg cursor-pointer"
+                    >
+                        Explore Collection
+                    </motion.button>
+                    <motion.button
+                        onClick={handleProtectedNavigation}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5, delay: 0.35 }}
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
+                        className="rounded-full border border-white/15 text-zinc-300 hover:text-white hover:bg-white/[0.04] font-medium text-xs sm:text-sm tracking-wide uppercase px-7 py-3.5 transition-colors cursor-pointer"
+                    >
+                        View Lookbook
+                    </motion.button>
+                </div>
+
 
                 {/* ================= MARQUEE ================= */}
                 {!loading && !error && tiles.length > 0 && (
