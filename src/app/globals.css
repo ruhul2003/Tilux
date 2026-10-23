@@ -1,13 +1,50 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+/* Minimalist Dark Mode Baseline */
+:root {
+    --bg-base: #09090b;
+    --bg-surface: #121215;
+    --border-subtle: rgba(255, 255, 255, 0.07);
+    --gold-accent: #E6C65C;
+}
 
+html {
+    scroll-behavior: smooth;
+    background-color: #09090b;
+    color: #f4f4f5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Minimalist Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #09090b;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3f3f46;
+}
+
+::selection {
+    background-color: rgba(230, 198, 92, 0.25);
+    color: #ffffff;
+}
 
 @keyframes marquee {
     0% {
         transform: translateX(0);
     }
-
     100% {
         transform: translateX(-50%);
     }
@@ -17,4 +54,35 @@
     width: max-content;
     display: flex;
     animation: marquee 20s linear infinite;
+}
+
+/* Wide Container & Minimal Glass Utilities */
+.container-wide {
+    width: 100%;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+@media (min-width: 640px) {
+    .container-wide {
+        padding-left: 1.75rem;
+        padding-right: 1.75rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container-wide {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
+}
+
+@media (min-width: 1536px) {
+    .container-wide {
+        padding-left: 3.5rem;
+        padding-right: 3.5rem;
+    }
 }
