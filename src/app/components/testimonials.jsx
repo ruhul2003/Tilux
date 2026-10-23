@@ -23,43 +23,43 @@ const Testimonials = () => {
     ];
 
     return (
-        <section className="bg-gradient-to-r from-zinc-800 to-gray-700 py-20 px-6 md:px-12 border-t border-white/5 overflow-hidden">
-            <div className="max-w-7xl mx-auto">
+        <section className="bg-[#0c0c0e] py-24 px-4 sm:px-6 lg:px-12 border-t border-white/[0.06] overflow-hidden">
+            <div className="max-w-[1600px] mx-auto">
                 <motion.div 
-                    initial={{ opacity: 0, y: -20 }}
+                    initial={{ opacity: 0, y: -15 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-center max-w-3xl mx-auto mb-16 space-y-3"
+                    className="text-center max-w-3xl mx-auto mb-16 space-y-2"
                 >
-                    <span className="text-[#FFD700] text-xs font-bold uppercase tracking-widest bg-[#FFD700]/10 px-4 py-1.5 rounded-full border border-[#FFD700]/20">
-                        Testimonials
+                    <span className="text-amber-400 text-xs font-semibold uppercase tracking-[0.25em]">
+                        Industry Endorsements
                     </span>
-                    <h2 className="text-3xl md:text-5xl font-bold text-white">
-                        Trusted by Professionals
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-white tracking-tight">
+                        Trusted By Architects
                     </h2>
-                    <p className="text-gray-300 text-sm md:text-base leading-relaxed">
-                        Read how interior designers, custom home builders, and architectural studios elevate spaces using Tilux materials.
+                    <p className="text-zinc-400 text-sm md:text-base font-light leading-relaxed">
+                        Perspectives from leading interior architects and custom estate builders constructing with Tilux materials.
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
                     {reviews.map((rev, idx) => (
                         <motion.div 
                             key={idx}
-                            initial={{ opacity: 0, x: idx === 0 ? -60 : 60 }}
-                            whileInView={{ opacity: 1, x: 0 }}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
-                            whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                            className="bg-white/5 border border-white/10 hover:border-white/20 backdrop-blur-xl rounded-3xl p-8 md:p-10 shadow-2xl flex flex-col justify-between space-y-8 cursor-pointer"
+                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                            className="bg-[#121215]/80 border border-white/[0.08] hover:border-white/20 rounded-3xl p-8 sm:p-10 shadow-xl flex flex-col justify-between space-y-8 cursor-pointer transition-all duration-300"
                         >
-                            <p className="text-zinc-200 text-lg italic leading-relaxed">
+                            <p className="text-zinc-200 text-base sm:text-lg font-light leading-relaxed">
                                 &ldquo;{rev.quote}&rdquo;
                             </p>
                             
-                            <div className="flex items-center gap-4 border-t border-white/5 pt-6">
-                                <div className="relative w-12 h-12 rounded-full overflow-hidden border border-white/25">
+                            <div className="flex items-center gap-4 border-t border-white/[0.06] pt-6">
+                                <div className="relative w-11 h-11 rounded-full overflow-hidden border border-white/20">
                                     <Image 
                                         src={rev.avatar}
                                         alt={rev.name}
@@ -69,8 +69,8 @@ const Testimonials = () => {
                                     />
                                 </div>
                                 <div>
-                                    <h4 className="text-white font-bold text-base">{rev.name}</h4>
-                                    <p className="text-zinc-400 text-xs">{rev.role}, <span className="text-[#FFD700]">{rev.company}</span></p>
+                                    <h4 className="text-white font-medium text-sm sm:text-base tracking-tight">{rev.name}</h4>
+                                    <p className="text-zinc-500 text-xs">{rev.role}, <span className="text-amber-300">{rev.company}</span></p>
                                 </div>
                             </div>
                         </motion.div>
@@ -82,3 +82,4 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
+
