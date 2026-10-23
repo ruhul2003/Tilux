@@ -93,42 +93,47 @@ export default function FAQNewsletter() {
 
 
                 {/* Newsletter Box */}
-                <div className="relative rounded-3xl p-8 md:p-14 bg-gradient-to-r from-amber-500/20 via-zinc-900 to-zinc-950 border border-amber-500/30 overflow-hidden shadow-2xl">
-                    <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/10 blur-[100px] rounded-full pointer-events-none" />
+                <div className="relative rounded-3xl p-8 sm:p-12 lg:p-16 bg-[#121215]/90 border border-white/[0.08] overflow-hidden shadow-2xl">
+                    <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/[0.03] blur-[100px] rounded-full pointer-events-none" />
 
                     <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                         <div className="lg:col-span-7 space-y-3 text-center lg:text-left">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 text-amber-400 text-xs font-semibold">
-                                <FaEnvelope /> Stay Updated
-                            </div>
-                            <h3 className="text-2xl md:text-4xl font-extrabold text-white">
-                                Subscribe for Exclusive Design Trends & Offers
+                            <span className="text-amber-400 text-xs font-semibold uppercase tracking-[0.2em] inline-block">
+                                Surface Releases
+                            </span>
+                            <h3 className="text-2xl sm:text-3xl md:text-4xl font-light text-white tracking-tight">
+                                Architectural Briefing
                             </h3>
-                            <p className="text-gray-400 text-sm md:text-base">
-                                Get monthly tile trend lookbooks, trade discounts, and architectural inspiration directly in your inbox.
+                            <p className="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed max-w-xl">
+                                Curated quarterly surface lookbooks, wholesale quarry arrival notices, and high-res specification downloads.
                             </p>
                         </div>
 
                         <div className="lg:col-span-5">
-                            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
+                            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2.5">
                                 <input
                                     type="email"
-                                    placeholder="Enter your email address..."
+                                    placeholder="Enter your professional email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full bg-zinc-900 border border-zinc-700 focus:border-amber-400 text-white placeholder-gray-500 rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                                    className="flex-grow px-5 py-3 rounded-full bg-white/[0.03] border border-white/[0.08] text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400/60 text-xs sm:text-sm transition"
                                 />
                                 <button
                                     type="submit"
-                                    className="px-6 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-sm transition flex items-center justify-center gap-2 whitespace-nowrap shadow-lg shadow-amber-500/20"
+                                    className="px-7 py-3 rounded-full bg-white hover:bg-amber-300 text-zinc-950 font-semibold text-xs uppercase tracking-wider transition cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap shadow-sm"
                                 >
-                                    <FaPaperPlane /> Join Now
+                                    <span>Join Briefing</span>
+                                    <FaPaperPlane className="w-2.5 h-2.5" />
                                 </button>
                             </form>
+                            <p className="text-[11px] text-zinc-500 mt-2 text-center lg:text-left font-light">
+                                Zero spam. Unsubscribe with one click anytime.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
     );
 }
