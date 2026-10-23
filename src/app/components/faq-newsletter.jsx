@@ -39,33 +39,35 @@ export default function FAQNewsletter() {
     };
 
     return (
-        <section className="py-20 px-4 bg-gradient-to-b from-black via-zinc-950 to-zinc-900 text-white relative">
-            <div className="max-w-6xl mx-auto space-y-20">
+        <section className="py-24 px-4 sm:px-6 lg:px-12 bg-[#09090b] text-white relative border-t border-white/[0.06]">
+            <div className="max-w-[1600px] mx-auto space-y-24">
                 {/* FAQ Section */}
                 <div>
-                    <div className="text-center max-w-2xl mx-auto mb-12">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-sm font-medium mb-3">
-                            <FaQuestionCircle className="w-4 h-4" />
-                            <span>Got Questions?</span>
-                        </div>
-                        <h2 className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-white via-gray-200 to-amber-200 bg-clip-text text-transparent">
-                            Frequently Asked Questions
+                    <div className="text-center max-w-3xl mx-auto mb-16 space-y-2">
+                        <span className="text-amber-400 text-xs font-semibold uppercase tracking-[0.25em]">
+                            Support & Clarity
+                        </span>
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-white tracking-tight">
+                            Frequently Inquired
                         </h2>
+                        <p className="text-zinc-400 text-sm md:text-base font-light leading-relaxed max-w-xl mx-auto">
+                            Essential details regarding slab sizing, calibration tolerances, and delivery logistics.
+                        </p>
                     </div>
 
-                    <div className="max-w-3xl mx-auto space-y-4">
+                    <div className="max-w-4xl mx-auto space-y-3">
                         {faqs.map((faq, idx) => (
                             <div
                                 key={idx}
-                                className="border border-zinc-800 rounded-2xl bg-zinc-900/60 backdrop-blur-xl overflow-hidden transition"
+                                className="border border-white/[0.08] hover:border-white/20 rounded-2xl bg-[#121215]/80 backdrop-blur-xl overflow-hidden transition-colors"
                             >
                                 <button
                                     onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)}
-                                    className="w-full p-5 text-left flex justify-between items-center text-base font-semibold text-white hover:text-amber-300 transition"
+                                    className="w-full p-5 sm:p-6 text-left flex justify-between items-center text-sm sm:text-base font-light text-zinc-100 hover:text-amber-200 transition-colors cursor-pointer"
                                 >
                                     <span>{faq.question}</span>
                                     <FaChevronDown
-                                        className={`w-4 h-4 text-amber-400 transition-transform duration-300 ${
+                                        className={`w-3.5 h-3.5 text-amber-400 transition-transform duration-300 flex-shrink-0 ml-4 ${
                                             openIndex === idx ? "rotate-180" : ""
                                         }`}
                                     />
@@ -78,7 +80,7 @@ export default function FAQNewsletter() {
                                             animate={{ opacity: 1, height: "auto" }}
                                             exit={{ opacity: 0, height: 0 }}
                                             transition={{ duration: 0.3 }}
-                                            className="px-5 pb-5 text-sm text-gray-400 leading-relaxed border-t border-zinc-800/60 pt-3"
+                                            className="px-5 sm:px-6 pb-6 text-xs sm:text-sm text-zinc-400 leading-relaxed font-light border-t border-white/[0.04] pt-4"
                                         >
                                             {faq.answer}
                                         </motion.div>
@@ -88,6 +90,7 @@ export default function FAQNewsletter() {
                         ))}
                     </div>
                 </div>
+
 
                 {/* Newsletter Box */}
                 <div className="relative rounded-3xl p-8 md:p-14 bg-gradient-to-r from-amber-500/20 via-zinc-900 to-zinc-950 border border-amber-500/30 overflow-hidden shadow-2xl">
