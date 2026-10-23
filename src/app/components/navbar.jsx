@@ -114,23 +114,31 @@ const NavBar = () => {
                                         <div
                                             tabIndex={0}
                                             role="button"
-                                            className="flex items-center gap-2 cursor-pointer"
+                                            className="flex items-center gap-2.5 p-1.5 pr-3 rounded-full border border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.06] transition-all cursor-pointer"
                                         >
-                                            <div className="w-9 h-9 rounded-full overflow-hidden border border-white/20">
+                                            <div className="w-8 h-8 rounded-full overflow-hidden border border-white/20">
                                                 <img
                                                     src={profileImageUrl}
                                                     alt={session.user.name || "User"}
                                                     className="w-full h-full object-cover"
                                                 />
                                             </div>
-                                            <div className="hidden md:block">
-                                                <p className="text-sm font-medium text-white leading-none mb-1">{session.user.name}</p>
-                                                <p className="text-[10px] text-gray-400 leading-none">{session.user.email}</p>
+                                            <div className="hidden md:block text-left">
+                                                <p className="text-xs font-semibold text-zinc-200 leading-none mb-1">{session.user.name}</p>
+                                                <p className="text-[10px] text-zinc-500 leading-none">{session.user.role === "shop_owner" ? "Shop Owner" : "Member"}</p>
                                             </div>
                                         </div>
-                                        <ul className="dropdown-content mt-4 w-60 rounded-2xl border border-white/20 bg-zinc-900/95 backdrop-blur-2xl p-2 shadow-2xl z-50">
-                                            <li><Link href="/profile" className="block px-4 py-3 hover:bg-white/10 rounded-xl text-white transition">View Profile</Link></li>
-                                            <li><button onClick={handleLogout} className="w-full text-left px-4 py-3 hover:bg-red-500/10 hover:text-red-400 rounded-xl text-white transition">Logout</button></li>
+                                        <ul className="dropdown-content mt-3 w-56 rounded-2xl border border-white/[0.08] bg-[#121215]/95 backdrop-blur-2xl p-1.5 shadow-2xl z-50">
+                                            <li>
+                                                <Link href="/profile" className="block px-3.5 py-2.5 hover:bg-white/[0.06] rounded-xl text-zinc-200 text-xs font-medium transition">
+                                                    View Profile
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <button onClick={handleLogout} className="w-full text-left px-3.5 py-2.5 hover:bg-red-500/10 hover:text-red-400 rounded-xl text-zinc-400 text-xs font-medium transition cursor-pointer">
+                                                    Logout
+                                                </button>
+                                            </li>
                                         </ul>
                                     </div>
                                 ) : (
@@ -138,15 +146,15 @@ const NavBar = () => {
                                     <div className="hidden lg:flex items-center gap-3">
                                         <Link
                                             href="/login"
-                                            className="px-5 py-2 rounded-full bg-white/10 text-white text-sm font-medium hover:bg-white/20 transition"
+                                            className="px-4 py-2 text-xs font-medium tracking-wide text-zinc-300 hover:text-white transition-colors"
                                         >
-                                            Login
+                                            Sign In
                                         </Link>
                                         <Link
                                             href="/signup"
-                                            className="px-6 py-2 rounded-full bg-[#FFD700] text-black text-sm font-bold hover:scale-105 transition"
+                                            className="px-5 py-2 rounded-full bg-amber-400 hover:bg-amber-300 text-zinc-950 text-xs font-semibold tracking-wide transition shadow-sm"
                                         >
-                                            Sign Up
+                                            Get Started
                                         </Link>
                                     </div>
                                 )}
@@ -156,26 +164,26 @@ const NavBar = () => {
                                     <div
                                         tabIndex={0}
                                         role="button"
-                                        className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 transition active:scale-95"
+                                        className="p-2 rounded-xl bg-white/[0.04] border border-white/10 hover:bg-white/[0.08] transition active:scale-95"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
-                                            className="h-6 w-6 text-white"
+                                            className="h-5 w-5 text-zinc-200"
                                             fill="none"
                                             viewBox="0 0 24 24"
                                             stroke="currentColor"
                                         >
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" d="M4 6h16M4 12h16M4 18h16" />
                                         </svg>
                                     </div>
 
-                                    <ul className="menu dropdown-content mt-4 w-64 rounded-2xl border border-white/20 bg-black/95 backdrop-blur-3xl p-4 shadow-2xl space-y-2 z-50">
+                                    <ul className="menu dropdown-content mt-3 w-64 rounded-2xl border border-white/[0.08] bg-[#0c0c0e]/95 backdrop-blur-2xl p-3 shadow-2xl space-y-1.5 z-50">
                                         {/* Navigation Links */}
                                         {navLinks.map((link) => (
                                             <li key={link.path}>
                                                 <Link
                                                     href={link.path}
-                                                    className="text-white rounded-xl px-4 py-3 hover:bg-white/10 transition block"
+                                                    className="text-zinc-200 text-sm rounded-xl px-3.5 py-2.5 hover:bg-white/[0.06] transition block"
                                                 >
                                                     {link.name}
                                                 </Link>
@@ -184,18 +192,18 @@ const NavBar = () => {
 
                                         {/* MOBILE AUTH: Only shows inside menu when logged out */}
                                         {!session?.user && !isPending && (
-                                            <div className="pt-4 mt-2 border-t border-white/10 flex flex-col gap-3">
+                                            <div className="pt-3 mt-2 border-t border-white/[0.08] flex flex-col gap-2">
                                                 <Link
                                                     href="/login"
-                                                    className="w-full text-center py-3 rounded-xl bg-white/10 text-white font-medium hover:bg-white/20 transition"
+                                                    className="w-full text-center py-2.5 rounded-xl border border-white/10 text-zinc-200 text-xs font-medium hover:bg-white/[0.06] transition"
                                                 >
-                                                    Login
+                                                    Sign In
                                                 </Link>
                                                 <Link
                                                     href="/signup"
-                                                    className="w-full text-center py-3 rounded-xl bg-[#FFD700] text-black font-bold hover:bg-yellow-400 transition"
+                                                    className="w-full text-center py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-zinc-950 text-xs font-semibold transition"
                                                 >
-                                                    Sign Up
+                                                    Get Started
                                                 </Link>
                                             </div>
                                         )}
@@ -206,6 +214,7 @@ const NavBar = () => {
                     </div>
                 </nav>
             </header>
+
 
             {/* ================= LOGIN MODAL ================= */}
             {showLoginModal && (
