@@ -38,7 +38,6 @@ export default function TileCalculator() {
     const boxesNeeded = Math.ceil(tilesNeeded / 10); // Assume 10 tiles per box
 
     return (
-    return (
         <section className="py-24 px-4 sm:px-6 lg:px-12 bg-[#0c0c0e] text-white relative overflow-hidden border-t border-white/[0.06]">
             {/* Background Accent Blur */}
             <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-amber-500/[0.02] blur-[150px] rounded-full pointer-events-none" />

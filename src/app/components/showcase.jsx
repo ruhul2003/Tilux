@@ -49,7 +49,6 @@ const Showcase = () => {
     };
 
     return (
-    return (
         <section className="bg-[#0c0c0e] py-24 px-4 sm:px-6 lg:px-12 border-t border-white/[0.06] overflow-hidden">
             <div className="max-w-[1600px] mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-16">

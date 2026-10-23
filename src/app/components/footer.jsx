@@ -14,7 +14,6 @@ function Footer() {
     };
 
     return (
-    return (
         <footer className="bg-[#09090b] text-white relative border-t border-white/[0.08]">
             <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12 py-20">
                 {/* TOP GRID */}
