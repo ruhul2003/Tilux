@@ -224,8 +224,8 @@ const AllTiles = () => {
                     animate="visible"
                     className={
                         viewMode === "grid"
-                            ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto"
-                            : "flex flex-col gap-4 max-w-5xl mx-auto"
+                            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full max-w-[1600px] mx-auto"
+                            : "flex flex-col gap-4 w-full max-w-[1600px] mx-auto"
                     }
                 >
                     {filteredAndSortedTiles.length > 0 ? (
@@ -234,65 +234,66 @@ const AllTiles = () => {
                                 key={tile.id}
                                 variants={cardVariants}
                                 whileHover={{ y: viewMode === "grid" ? -4 : 0 }}
-                                className={`group rounded-2xl border border-zinc-800 bg-zinc-900/60 backdrop-blur-xl overflow-hidden transition hover:border-amber-500/40 hover:shadow-xl hover:shadow-amber-500/5 ${
+                                className={`group rounded-2xl border border-white/[0.08] bg-[#121215]/80 hover:bg-[#18181c] hover:border-white/20 backdrop-blur-xl overflow-hidden transition-all duration-300 shadow-md ${
                                     viewMode === "list" ? "flex flex-col sm:flex-row items-center p-4 gap-6" : "flex flex-col"
                                 }`}
                             >
-                                <div className={`relative overflow-hidden ${viewMode === "list" ? "w-full sm:w-48 h-40 rounded-xl flex-shrink-0" : "w-full h-48"}`}>
+                                <div className={`relative overflow-hidden bg-zinc-950 ${viewMode === "list" ? "w-full sm:w-56 h-44 rounded-xl flex-shrink-0" : "w-full h-60"}`}>
                                     <Image
                                         src={tile.image}
                                         alt={tile.title}
                                         fill
-                                        className="object-cover group-hover:scale-105 transition duration-500"
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
+                                        className="object-cover group-hover:scale-105 transition duration-500 opacity-90 group-hover:opacity-100"
                                     />
                                     {/* Quick View Hover Button */}
                                     <button
                                         onClick={() => setQuickViewTile(tile)}
-                                        className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-white gap-2 font-medium text-xs backdrop-blur-xs"
+                                        className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-200 flex items-center justify-center text-white gap-2 font-medium text-xs backdrop-blur-xs cursor-pointer"
                                     >
-                                        <FaEye className="w-4 h-4 text-amber-400" /> Quick Preview
+                                        <FaEye className="w-3.5 h-3.5 text-amber-300" /> Quick Preview
                                     </button>
                                 </div>
 
-                                <div className={`flex flex-col flex-grow ${viewMode === "list" ? "w-full" : "p-5"}`}>
-                                    <div className="flex justify-between items-start mb-2">
-                                        <h2 className="text-lg font-bold text-white group-hover:text-amber-300 transition">
+                                <div className={`flex flex-col flex-grow ${viewMode === "list" ? "w-full" : "p-6"}`}>
+                                    <div className="flex justify-between items-start mb-2 gap-2">
+                                        <h2 className="text-base font-semibold text-white group-hover:text-amber-200 transition line-clamp-1">
                                             {tile.title}
                                         </h2>
                                         <span
-                                            className={`text-[10px] uppercase font-bold px-2.5 py-0.5 rounded-full border ${
+                                            className={`text-[10px] uppercase tracking-wider font-medium px-2 py-0.5 rounded-full border ${
                                                 tile.inStock
-                                                    ? "bg-green-500/10 text-green-400 border-green-500/20"
-                                                    : "bg-red-500/10 text-red-400 border-red-500/20"
+                                                    ? "bg-emerald-950/60 text-emerald-300 border-emerald-500/30"
+                                                    : "bg-zinc-900/70 text-zinc-400 border-zinc-700/50"
                                             }`}
                                         >
-                                            {tile.inStock ? "In Stock" : "Out of Stock"}
+                                            {tile.inStock ? "In Stock" : "Limited"}
                                         </span>
                                     </div>
 
-                                    <p className="text-xs text-gray-400 line-clamp-2 mb-4">
+                                    <p className="text-xs text-zinc-400 line-clamp-2 mb-4 font-light leading-relaxed">
                                         {tile.description}
                                     </p>
 
-                                    <div className="mt-auto flex items-center justify-between pt-3 border-t border-zinc-800/80">
+                                    <div className="mt-auto flex items-center justify-between pt-4 border-t border-white/[0.06]">
                                         <div>
-                                            <span className="text-xs text-gray-500 block">Price / sq ft</span>
-                                            <span className="text-xl font-extrabold text-amber-400">
+                                            <span className="text-[10px] text-zinc-500 uppercase tracking-wider block">Rate / Sq Ft</span>
+                                            <span className="text-base font-semibold text-amber-300">
                                                 ${tile.price}
                                             </span>
                                         </div>
 
-                                        <div className="flex gap-2">
+                                        <div className="flex gap-2 items-center">
                                             <button
                                                 onClick={() => setQuickViewTile(tile)}
-                                                className="p-2.5 rounded-xl border border-zinc-700 bg-zinc-800 text-gray-300 hover:text-white hover:border-gray-500 transition text-xs"
+                                                className="p-2 rounded-full border border-white/10 bg-white/[0.02] text-zinc-400 hover:text-white hover:border-white/20 transition cursor-pointer"
                                                 title="Quick View"
                                             >
-                                                <FaEye />
+                                                <FaEye className="w-3 h-3" />
                                             </button>
                                             <Link href={`/all-tiles/${tile.id}`}>
-                                                <button className="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs transition shadow-md shadow-amber-500/20">
-                                                    View Details
+                                                <button className="px-4 py-2 rounded-full bg-white hover:bg-amber-300 text-zinc-950 font-semibold text-xs tracking-wider uppercase transition cursor-pointer shadow-sm">
+                                                    Details &rarr;
                                                 </button>
                                             </Link>
                                         </div>
@@ -325,21 +326,21 @@ const AllTiles = () => {
                         className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4"
                     >
                         <motion.div
-                            initial={{ scale: 0.95, opacity: 0, y: 20 }}
+                            initial={{ scale: 0.96, opacity: 0, y: 15 }}
                             animate={{ scale: 1, opacity: 1, y: 0 }}
-                            exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                            exit={{ scale: 0.96, opacity: 0, y: 15 }}
                             onClick={(e) => e.stopPropagation()}
-                            className="bg-zinc-900 border border-zinc-800 rounded-3xl max-w-2xl w-full p-6 md:p-8 overflow-hidden shadow-2xl relative"
+                            className="bg-[#121215]/95 border border-white/[0.08] rounded-3xl max-w-2xl w-full p-6 md:p-8 overflow-hidden shadow-2xl relative backdrop-blur-2xl"
                         >
                             <button
                                 onClick={() => setQuickViewTile(null)}
-                                className="absolute top-4 right-4 text-gray-400 hover:text-white p-2 rounded-full bg-zinc-800 border border-zinc-700 transition"
+                                className="absolute top-4 right-4 text-zinc-400 hover:text-white p-2 rounded-full border border-white/10 bg-white/[0.02] hover:bg-white/[0.06] transition cursor-pointer text-xs"
                             >
-                                <FaTimes className="w-4 h-4" />
+                                <FaTimes className="w-3.5 h-3.5" />
                             </button>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
-                                <div className="relative w-full h-64 sm:h-72 rounded-2xl overflow-hidden border border-zinc-800">
+                                <div className="relative w-full h-64 sm:h-72 rounded-2xl overflow-hidden border border-white/[0.08] bg-zinc-950">
                                     <Image
                                         src={quickViewTile.image}
                                         alt={quickViewTile.title}
@@ -348,42 +349,39 @@ const AllTiles = () => {
                                     />
                                 </div>
 
-                                <div>
-                                    <div className="inline-block px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-semibold mb-2">
-                                        Quick Preview
-                                    </div>
-                                    <h3 className="text-2xl font-extrabold text-white mb-2">{quickViewTile.title}</h3>
-                                    <p className="text-gray-300 text-sm mb-4 leading-relaxed">{quickViewTile.description}</p>
+                                <div className="space-y-3 text-left">
+                                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-amber-300">
+                                        Surface Preview
+                                    </span>
+                                    <h3 className="text-xl sm:text-2xl font-light text-white tracking-tight">{quickViewTile.title}</h3>
+                                    <p className="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed">{quickViewTile.description}</p>
 
-                                    <div className="space-y-2 mb-6 text-xs text-gray-400">
+                                    <div className="space-y-1.5 text-xs text-zinc-400 pt-2 font-light">
                                         <div className="flex items-center gap-2">
-                                            {quickViewTile.inStock ? (
-                                                <FaCheck className="text-green-400" />
-                                            ) : (
-                                                <FaTimesCircle className="text-red-400" />
-                                            )}
-                                            <span>{quickViewTile.inStock ? "Available in Stock" : "Currently Out of Stock"}</span>
+                                            <span className={`w-1.5 h-1.5 rounded-full ${quickViewTile.inStock ? "bg-emerald-400" : "bg-red-400"}`}></span>
+                                            <span>{quickViewTile.inStock ? "Available for order" : "Limited stock"}</span>
                                         </div>
                                     </div>
 
-                                    <div className="flex items-center justify-between border-t border-zinc-800 pt-4">
+                                    <div className="flex items-center justify-between border-t border-white/[0.06] pt-4 mt-4">
                                         <div>
-                                            <span className="text-xs text-gray-500 block">Unit Price</span>
-                                            <span className="text-2xl font-extrabold text-amber-400">${quickViewTile.price}</span>
+                                            <span className="text-[10px] text-zinc-500 uppercase tracking-wider block">Price / Sq Ft</span>
+                                            <span className="text-xl font-semibold text-amber-300">${quickViewTile.price}</span>
                                         </div>
 
                                         <Link href={`/all-tiles/${quickViewTile.id}`}>
                                             <button
                                                 onClick={() => setQuickViewTile(null)}
-                                                className="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-sm transition shadow-lg shadow-amber-500/20"
+                                                className="px-5 py-2.5 rounded-full bg-white hover:bg-amber-300 text-zinc-950 font-semibold text-xs uppercase tracking-wider transition cursor-pointer shadow-sm"
                                             >
-                                                Full Details & Order
+                                                Full Details &rarr;
                                             </button>
                                         </Link>
                                     </div>
                                 </div>
                             </div>
                         </motion.div>
+
                     </motion.div>
                 )}
             </AnimatePresence>
