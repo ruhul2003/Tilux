@@ -218,33 +218,39 @@ const NavBar = () => {
 
             {/* ================= LOGIN MODAL ================= */}
             {showLoginModal && (
-                <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-                    <div className="bg-zinc-900 rounded-3xl max-w-md w-full p-8 text-center border border-white/10 relative">
+                <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-[100] flex items-center justify-center p-4">
+                    <div className="bg-[#121215]/95 border border-white/[0.08] rounded-3xl max-w-sm w-full p-7 text-center relative shadow-2xl backdrop-blur-2xl">
                         <button
                             onClick={() => setShowLoginModal(false)}
-                            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition cursor-pointer"
+                            className="absolute top-4 right-4 w-8 h-8 rounded-full border border-white/10 bg-white/[0.02] hover:bg-white/[0.08] text-zinc-400 hover:text-white flex items-center justify-center transition cursor-pointer text-xs"
                         >
                             ✕
                         </button>
-                        <h2 className="text-3xl font-bold text-white mb-3">Login Required</h2>
-                        <p className="text-gray-400 mb-8">You need to be logged in to browse our collection.</p>
-                        <div className="flex flex-col gap-3">
+                        <div className="w-11 h-11 mx-auto mb-4 rounded-2xl bg-amber-400/10 border border-amber-400/20 text-amber-400 flex items-center justify-center text-lg">
+                            ✦
+                        </div>
+                        <h2 className="text-xl font-bold text-white tracking-tight mb-2">Member Access</h2>
+                        <p className="text-xs text-zinc-400 mb-6 leading-relaxed">
+                            Sign in to explore high-resolution surfaces, pricing catalogs, and tile specifications.
+                        </p>
+                        <div className="flex flex-col gap-2.5">
                             <button
                                 onClick={() => { setShowLoginModal(false); router.push("/login"); }}
-                                className="bg-[#FFD700] text-black font-bold py-4 rounded-2xl hover:bg-yellow-400 transition"
+                                className="bg-amber-400 hover:bg-amber-300 text-zinc-950 font-semibold py-3 rounded-xl text-xs uppercase tracking-wider transition cursor-pointer shadow-sm"
                             >
-                                Login Now
+                                Sign In Now
                             </button>
                             <button
                                 onClick={() => setShowLoginModal(false)}
-                                className="bg-white/10 text-white font-medium py-4 rounded-2xl hover:bg-white/20 transition"
+                                className="border border-white/10 hover:bg-white/[0.05] text-zinc-400 hover:text-zinc-200 font-medium py-3 rounded-xl text-xs uppercase tracking-wider transition cursor-pointer"
                             >
-                                Cancel
+                                Continue Browsing
                             </button>
                         </div>
                     </div>
                 </div>
             )}
+
         </>
     );
 };
