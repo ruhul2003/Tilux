@@ -104,60 +104,60 @@ const Banner = () => {
 
     return (
         <div 
-            className="flex flex-col items-center text-center px-4 md:px-6 pb-20 overflow-hidden relative"
-            style={{
-                backgroundImage: "linear-gradient(to right, rgba(24, 24, 27, 0.95), rgba(39, 39, 42, 0.9)), url('/marble-bg.png')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundAttachment: "fixed"
-            }}
+            className="w-full flex flex-col items-center text-center px-4 sm:px-6 lg:px-12 pb-24 overflow-hidden relative bg-[#09090b]"
         >
+            {/* Subtle Minimal Ambient Glow */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1400px] h-[550px] bg-gradient-to-b from-amber-500/[0.04] via-amber-500/[0.01] to-transparent pointer-events-none blur-3xl -z-10" />
+            <div className="absolute top-1/3 right-10 w-96 h-96 bg-zinc-800/20 blur-[140px] pointer-events-none -z-10" />
             
             {/* ================= REDIRECT LOADING OVERLAY ================= */}
             {isRedirecting && (
-                <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-[200] flex flex-col items-center justify-center">
+                <div className="fixed inset-0 bg-black/70 backdrop-blur-md z-[200] flex flex-col items-center justify-center">
                     <div className="relative flex items-center justify-center">
                         {/* Gold Spinner */}
-                        <div className="w-16 h-16 rounded-full border-4 border-[#FFD700]/10 border-t-[#FFD700] animate-spin"></div>
+                        <div className="w-14 h-14 rounded-full border-2 border-amber-400/20 border-t-amber-400 animate-spin"></div>
                         {/* Inner Pulse */}
-                        <div className="absolute w-12 h-12 rounded-full border border-white/10 animate-pulse bg-white/5"></div>
+                        <div className="absolute w-10 h-10 rounded-full border border-white/10 animate-pulse bg-white/[0.02]"></div>
                     </div>
-                    <p className="mt-6 text-white font-bold tracking-[0.2em] uppercase text-xs animate-pulse">
-                        Loading Product Details
+                    <p className="mt-5 text-zinc-300 font-medium tracking-[0.25em] uppercase text-[11px] animate-pulse">
+                        Loading Surface Catalog
                     </p>
                 </div>
             )}
 
             {/* ================= HERO SECTION ================= */}
-            <div className="min-h-[70vh] md:min-h-[85vh] text-center flex flex-col justify-center items-center w-full max-w-7xl">
+            <div className="min-h-[72vh] md:min-h-[85vh] text-center flex flex-col justify-center items-center w-full max-w-[1600px] pt-12 md:pt-20">
                 <motion.p 
-                    initial={{ opacity: 0, y: -20 }}
+                    initial={{ opacity: 0, y: -15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="flex items-center gap-2 font-semibold text-xs md:text-sm rounded-full bg-[#2F2F2F] px-4 py-2 text-white w-fit mt-8"
+                    className="flex items-center gap-2 font-medium text-xs tracking-wider uppercase rounded-full bg-white/[0.04] border border-white/[0.08] px-4 py-1.5 text-zinc-300 w-fit"
                 >
-                    <IoMdRadioButtonOn className="text-[#FFD700]" />
-                    Built On Quality And Trust
+                    <span className="w-2 h-2 rounded-full bg-amber-400 inline-block animate-pulse"></span>
+                    Architectural Porcelain & Natural Marble
                 </motion.p>
 
                 <motion.h1 
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.1 }}
-                    className="text-white mt-6 text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-tight max-w-5xl"
+                    className="text-white mt-8 text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-light tracking-tight leading-[1.08] max-w-6xl"
                 >
-                    Discover Your{" "}
-                    <span className="text-[#FFD700]">Perfect Aesthetic</span>
+                    Crafted Surfaces For <br className="hidden sm:inline" />
+                    <span className="font-serif italic font-normal bg-gradient-to-r from-amber-200 via-amber-300 to-amber-100 bg-clip-text text-transparent">
+                        Modern Spaces
+                    </span>
                 </motion.h1>
 
                 <motion.p 
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-base md:text-lg text-gray-300 mt-5 max-w-2xl leading-relaxed"
+                    className="text-sm sm:text-base md:text-lg text-zinc-400 font-light mt-6 max-w-2xl leading-relaxed"
                 >
-                    We manufacture high-quality natural marble using advanced processing technology to deliver timeless beauty and strength.
+                    Precision-calibrated stone slabs and designer tiles sourced from premier global quarries, engineered for timeless residential and commercial architecture.
                 </motion.p>
+
 
                 <motion.ul 
                     variants={containerVariants}
