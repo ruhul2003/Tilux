@@ -205,18 +205,21 @@ const Banner = () => {
 
                 {/* ================= MARQUEE ================= */}
                 {!loading && !error && tiles.length > 0 && (
-                    <div className="w-screen mt-16 md:mt-24">
-                        <Marquee speed={50} pauseOnHover={true} gradient={false} className="bg-black/30 backdrop-blur-sm text-white py-4 border-y border-white/5">
-                            <span className="mx-4 font-bold text-[#FFD700]">NEW ARRIVALS:</span>
+                    <div className="w-screen mt-20 md:mt-28">
+                        <Marquee speed={38} pauseOnHover={true} gradient={false} className="bg-[#0c0c0e]/70 backdrop-blur-md text-zinc-300 py-3.5 border-y border-white/[0.06]">
+                            <span className="mx-6 font-semibold text-amber-300/90 text-xs tracking-[0.25em] uppercase">
+                                Curated Slabs:
+                            </span>
                             {tiles.slice(0, 8).map((tile, index) => (
-                                <span key={index} className="mx-6 flex items-center gap-2">
-                                    <span className="h-1 w-1 bg-white rounded-full"></span>
+                                <span key={index} className="mx-8 flex items-center gap-3 text-xs tracking-wider uppercase text-zinc-300 font-light hover:text-white transition-colors">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400/50"></span>
                                     {tile.title}
                                 </span>
                             ))}
                         </Marquee>
                     </div>
                 )}
+
             </div>
 
             {/* ================= PRODUCT SECTION ================= */}
