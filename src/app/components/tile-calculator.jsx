@@ -38,56 +38,39 @@ export default function TileCalculator() {
     const boxesNeeded = Math.ceil(tilesNeeded / 10); // Assume 10 tiles per box
 
     return (
-        <section className="py-20 px-4 bg-gradient-to-b from-gray-900 via-zinc-900 to-black text-white relative overflow-hidden">
+    return (
+        <section className="py-24 px-4 sm:px-6 lg:px-12 bg-[#0c0c0e] text-white relative overflow-hidden border-t border-white/[0.06]">
             {/* Background Accent Blur */}
-            <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-amber-500/10 blur-[120px] rounded-full pointer-events-none" />
-            <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-orange-600/10 blur-[100px] rounded-full pointer-events-none" />
+            <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-amber-500/[0.02] blur-[150px] rounded-full pointer-events-none" />
 
-            <div className="max-w-6xl mx-auto relative z-10">
+            <div className="max-w-[1600px] mx-auto relative z-10">
                 {/* Section Header */}
-                <div className="text-center max-w-2xl mx-auto mb-14">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-sm font-medium mb-4"
-                    >
-                        <FaCalculator className="w-4 h-4" />
-                        <span>Interactive Planning Tool</span>
-                    </motion.div>
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-white via-gray-200 to-amber-200 bg-clip-text text-transparent"
-                    >
-                        Tile Room Calculator
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                        className="text-gray-400 mt-4 text-base md:text-lg"
-                    >
-                        Estimate exact tile quantities, wastage allowance, and budget before starting your renovation.
-                    </motion.p>
+                <div className="text-center max-w-3xl mx-auto mb-16 space-y-2">
+                    <span className="text-amber-400 text-xs font-semibold tracking-[0.25em] uppercase">
+                        Estimation Engine
+                    </span>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-white tracking-tight">
+                        Tile & Slab Calculator
+                    </h2>
+                    <p className="text-zinc-400 text-sm md:text-base font-light max-w-2xl mx-auto leading-relaxed">
+                        Calculate exact surface coverage, offcut buffer allowances, and material budgeting before placing orders.
+                    </p>
                 </div>
 
                 {/* Main Interactive Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
                     {/* Controls Panel */}
                     <motion.div
-                        initial={{ opacity: 0, x: -30 }}
+                        initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="lg:col-span-7 bg-zinc-900/80 backdrop-blur-xl border border-zinc-800 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col justify-between"
+                        className="lg:col-span-7 bg-[#121215]/80 backdrop-blur-xl border border-white/[0.08] rounded-3xl p-6 md:p-10 shadow-2xl flex flex-col justify-between"
                     >
-                        <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                            <FaRulerCombined className="text-amber-400" />
-                            Room & Tile Specifications
+                        <h3 className="text-lg font-light text-white mb-6 flex items-center gap-2.5">
+                            <FaRulerCombined className="text-amber-400 w-4 h-4" />
+                            <span>Room & Slab Dimensions</span>
                         </h3>
+
 
                         <div className="space-y-6">
                             {/* Room Dimensions */}
