@@ -61,40 +61,43 @@ const NavBar = () => {
 
     return (
         <>
-            <header className="w-full pb-5 bg-gradient-to-r from-zinc-800 to-gray-700 pt-3 px-2 lg:px-8 sticky top-0 z-50">
-                <nav className="max-w-7xl mx-auto flex items-center justify-between px-5 lg:px-10 py-3 lg:py-4 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl shadow-lg">
+            <header className="w-full bg-[#09090b]/85 backdrop-blur-xl border-b border-white/[0.08] px-4 sm:px-6 lg:px-12 py-3.5 sticky top-0 z-50">
+                <nav className="max-w-[1600px] mx-auto flex items-center justify-between">
 
                     {/* ================= LEFT SIDE: LOGO ================= */}
-                    <Link href="/" className="flex-shrink-0">
+                    <Link href="/" className="flex items-center gap-3 group">
                         <Image
                             src={logo}
                             alt="Tilux Logo"
-                            width={85}
+                            width={90}
                             height={32}
                             priority
-                            className="object-contain lg:w-[100px]"
+                            className="object-contain w-20 lg:w-[92px] transition-opacity duration-200 group-hover:opacity-90"
                         />
+                        <span className="hidden sm:inline-block text-[10px] font-semibold tracking-[0.25em] text-zinc-400 uppercase border-l border-zinc-800 pl-3">
+                            Surfaces
+                        </span>
                     </Link>
 
                     {/* ================= CENTER: DESKTOP NAVIGATION ================= */}
-                    <div className="hidden lg:flex items-center gap-10">
+                    <div className="hidden lg:flex items-center gap-8 xl:gap-10">
                         {navLinks.map((link) => (
                             <div key={link.path}>
                                 {link.name !== "Home" ? (
                                     <button
                                         onClick={() => handleProtectedNavigation(link.path)}
-                                        className="relative text-white text-[16px] font-medium tracking-wide transition hover:text-[#FFD700] group cursor-pointer bg-transparent border-none outline-none"
+                                        className="relative text-zinc-300 hover:text-white text-sm font-medium tracking-wide transition-colors py-1 group cursor-pointer bg-transparent border-none outline-none"
                                     >
                                         {link.name}
-                                        <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[#FFD700] transition-all duration-300 group-hover:w-full"></span>
+                                        <span className="absolute left-0 -bottom-0.5 h-[1.5px] w-0 bg-amber-400/90 transition-all duration-300 group-hover:w-full"></span>
                                     </button>
                                 ) : (
                                     <Link
                                         href={link.path}
-                                        className="relative text-white text-[16px] font-medium tracking-wide transition hover:text-[#FFD700] group"
+                                        className="relative text-zinc-300 hover:text-white text-sm font-medium tracking-wide transition-colors py-1 group"
                                     >
                                         {link.name}
-                                        <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[#FFD700] transition-all duration-300 group-hover:w-full"></span>
+                                        <span className="absolute left-0 -bottom-0.5 h-[1.5px] w-0 bg-amber-400/90 transition-all duration-300 group-hover:w-full"></span>
                                     </Link>
                                 )}
                             </div>
