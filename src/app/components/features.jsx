@@ -50,23 +50,23 @@ const Features = () => {
     };
 
     return (
-        <section className="bg-gradient-to-r from-zinc-800 to-gray-700 py-20 px-6 md:px-12 border-t border-white/5 overflow-hidden">
-            <div className="max-w-7xl mx-auto">
+        <section className="bg-[#09090b] py-24 px-4 sm:px-6 lg:px-12 border-t border-white/[0.06] overflow-hidden">
+            <div className="max-w-[1600px] mx-auto">
                 <motion.div 
-                    initial={{ opacity: 0, y: -20 }}
+                    initial={{ opacity: 0, y: -15 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-center max-w-3xl mx-auto mb-16 space-y-3"
+                    className="text-center max-w-3xl mx-auto mb-16 space-y-2"
                 >
-                    <span className="text-[#FFD700] text-xs font-bold uppercase tracking-widest bg-[#FFD700]/10 px-4 py-1.5 rounded-full border border-[#FFD700]/20">
-                        Our Standards
+                    <span className="text-amber-400 text-xs font-semibold uppercase tracking-[0.25em]">
+                        Engineering Standards
                     </span>
-                    <h2 className="text-3xl md:text-5xl font-bold text-white">
-                        Designed for Perfection
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-white tracking-tight">
+                        Designed For Permanence
                     </h2>
-                    <p className="text-gray-300 text-sm md:text-base leading-relaxed">
-                        Discover the engineering excellence and artistry behind every slab and tile in the Tilux catalogue.
+                    <p className="text-zinc-400 text-sm md:text-base font-light leading-relaxed">
+                        Precision calibration, laser-guided cutting tolerances, and certified responsible quarry extraction.
                     </p>
                 </motion.div>
 
@@ -75,21 +75,24 @@ const Features = () => {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-100px" }}
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
                 >
                     {featuresList.map((feat, idx) => (
                         <motion.div 
                             key={idx}
                             variants={cardVariants}
-                            whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                            className="bg-white/5 border border-white/10 hover:border-white/20 backdrop-blur-xl rounded-3xl p-8 hover:bg-white/10 transition-all duration-300 shadow-xl group flex flex-col justify-between cursor-pointer"
+                            whileHover={{ y: -6 }}
+                            className="bg-[#121215]/80 border border-white/[0.08] hover:border-white/20 rounded-2xl p-8 hover:bg-[#18181c] transition-all duration-300 shadow-lg group flex flex-col justify-between cursor-pointer"
                         >
-                            <div className="mb-6 p-4 w-fit rounded-2xl bg-white/5 group-hover:scale-110 transition duration-300">
+                            <div className="mb-6 w-12 h-12 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-amber-300 group-hover:border-amber-400/40 transition-colors">
                                 {feat.icon}
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold text-white mb-3">{feat.title}</h3>
-                                <p className="text-zinc-300 text-sm leading-relaxed">{feat.description}</p>
+                                <span className="text-[10px] text-zinc-500 uppercase tracking-widest font-mono block mb-1">
+                                    0{idx + 1}
+                                </span>
+                                <h3 className="text-lg font-medium text-white mb-2 tracking-tight">{feat.title}</h3>
+                                <p className="text-zinc-400 text-xs leading-relaxed font-light">{feat.description}</p>
                             </div>
                         </motion.div>
                     ))}
@@ -100,3 +103,4 @@ const Features = () => {
 };
 
 export default Features;
+
