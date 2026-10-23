@@ -49,45 +49,28 @@ export default function RoomVisualizer() {
     const currentRoom = rooms[selectedRoom];
 
     return (
-        <section className="py-20 px-4 bg-gradient-to-b from-zinc-950 via-zinc-900 to-black text-white relative overflow-hidden">
+        <section className="py-24 px-4 sm:px-6 lg:px-12 bg-[#09090b] text-white relative overflow-hidden border-t border-white/[0.06]">
             {/* Background Glow */}
-            <div className="absolute top-1/4 right-10 w-96 h-96 bg-amber-500/10 blur-[130px] rounded-full pointer-events-none" />
-            <div className="absolute bottom-10 left-10 w-96 h-96 bg-blue-600/10 blur-[140px] rounded-full pointer-events-none" />
+            <div className="absolute top-1/4 right-10 w-96 h-96 bg-amber-500/[0.03] blur-[150px] rounded-full pointer-events-none" />
+            <div className="absolute bottom-10 left-10 w-96 h-96 bg-zinc-800/[0.1] blur-[150px] rounded-full pointer-events-none" />
 
-            <div className="max-w-6xl mx-auto relative z-10">
+            <div className="max-w-[1600px] mx-auto relative z-10">
                 {/* Header */}
-                <div className="text-center max-w-2xl mx-auto mb-12">
-                    <motion.div
-                        initial={{ opacity: 0, y: 15 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-sm font-medium mb-3"
-                    >
-                        <FaMagic className="w-4 h-4" />
-                        <span>Real-Time Style Simulator</span>
-                    </motion.div>
-                    <motion.h2
-                        initial={{ opacity: 0, y: 15 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-white via-gray-200 to-amber-200 bg-clip-text text-transparent"
-                    >
-                        Interactive Room Visualizer
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 15 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                        className="text-gray-400 mt-3 text-base md:text-lg"
-                    >
-                        Experiment with room layouts, tile textures, and lighting moods to visualize your dream space.
-                    </motion.p>
+                <div className="text-center max-w-3xl mx-auto mb-16 space-y-2">
+                    <span className="text-amber-400 text-xs font-semibold tracking-[0.25em] uppercase">
+                        Interactive Simulator
+                    </span>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-white tracking-tight">
+                        Surface Visualizer
+                    </h2>
+                    <p className="text-zinc-400 text-sm md:text-base font-light max-w-2xl mx-auto leading-relaxed">
+                        Experiment with space environments, slab veining, and ambient lighting to envision real-world architectural installations.
+                    </p>
                 </div>
 
                 {/* Main Simulator Card */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-zinc-900/80 border border-zinc-800 rounded-3xl p-6 md:p-8 backdrop-blur-2xl shadow-2xl">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#121215]/80 border border-white/[0.08] rounded-3xl p-6 md:p-10 backdrop-blur-2xl shadow-2xl">
+
                     {/* Controls Sidebar */}
                     <div className="lg:col-span-5 space-y-6">
                         {/* 1. Room Type Selector */}
