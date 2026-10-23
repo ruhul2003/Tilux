@@ -94,56 +94,59 @@ const AllTiles = () => {
     }, [tiles, searchTerm, selectedCategory, sortBy]);
 
     return (
-        <div className="min-h-screen bg-gradient-to-r from-zinc-900 via-gray-900 to-black text-white px-4 md:px-8 py-12">
-            <div className="max-w-7xl mx-auto mb-10">
-                <div className="text-center max-w-3xl mx-auto mb-8">
-                    <h1 className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-white via-amber-200 to-amber-400 bg-clip-text text-transparent mb-4">
-                        Premium Tile Collection
+        <div className="min-h-screen bg-[#09090b] text-white px-4 sm:px-6 lg:px-12 py-16">
+            <div className="max-w-[1600px] mx-auto mb-10">
+                <div className="text-center max-w-3xl mx-auto mb-10 space-y-2">
+                    <span className="text-amber-400 text-xs font-semibold uppercase tracking-[0.25em]">
+                        Surface Portfolio
+                    </span>
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-light text-white tracking-tight">
+                        Architectural Slabs & Tiles
                     </h1>
-                    <p className="text-gray-400 text-base md:text-lg">
-                        Explore hand-crafted floor, wall, and accent tiles designed for modern architectural spaces.
+                    <p className="text-zinc-400 text-xs sm:text-sm font-light max-w-xl mx-auto leading-relaxed">
+                        Filter, inspect, and calculate quantities across our curated directory of marble and porcelain finishes.
                     </p>
                 </div>
 
                 {/* Search Bar */}
-                <div className="relative max-w-xl mx-auto mb-8">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-zinc-400">
-                        <FaSearch className="h-5 w-5" />
+                <div className="relative max-w-md mx-auto mb-10">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-zinc-500">
+                        <FaSearch className="h-4 w-4" />
                     </div>
 
                     <input
                         type="text"
-                        placeholder="Search tiles by name, finish, or price..."
+                        placeholder="Search surfaces by name, finish, or price..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full bg-zinc-800/80 border border-zinc-700/80 focus:border-amber-400 
-                                   text-white placeholder-zinc-400 rounded-2xl py-3.5 pl-12 pr-10 
-                                   focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-all
-                                   text-base backdrop-blur-xl shadow-lg"
+                        className="w-full bg-white/[0.03] border border-white/[0.08] focus:border-amber-400/60 
+                                   text-white placeholder-zinc-500 rounded-full py-3 pl-11 pr-10 
+                                   focus:outline-none transition-all
+                                   text-xs sm:text-sm backdrop-blur-xl"
                     />
 
                     {searchTerm && (
                         <button
                             onClick={() => setSearchTerm("")}
-                            className="absolute inset-y-0 right-4 flex items-center text-zinc-400 hover:text-white transition"
+                            className="absolute inset-y-0 right-4 flex items-center text-zinc-500 hover:text-white transition cursor-pointer text-xs"
                         >
-                            <FaTimes className="w-4 h-4" />
+                            <FaTimes className="w-3.5 h-3.5" />
                         </button>
                     )}
                 </div>
 
                 {/* Filters & Control Toolbar */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-zinc-800/40 p-4 rounded-2xl border border-zinc-700/40 backdrop-blur-md">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[#121215]/80 p-2.5 sm:p-3 rounded-2xl border border-white/[0.08] backdrop-blur-md">
                     {/* Category Filter Pills */}
-                    <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
+                    <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 no-scrollbar">
                         {categories.map((cat) => (
                             <button
                                 key={cat}
                                 onClick={() => setSelectedCategory(cat)}
-                                className={`px-4 py-2 rounded-xl text-xs md:text-sm font-medium transition whitespace-nowrap ${
+                                className={`px-4 py-1.5 rounded-full text-xs font-medium transition whitespace-nowrap cursor-pointer border ${
                                     selectedCategory === cat
-                                        ? "bg-amber-500 text-black font-bold shadow-md shadow-amber-500/20"
-                                        : "bg-zinc-800 text-gray-300 hover:bg-zinc-700 hover:text-white"
+                                        ? "bg-white text-zinc-950 border-white font-semibold shadow-sm"
+                                        : "bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:text-white hover:bg-white/[0.05]"
                                 }`}
                             >
                                 {cat}
@@ -153,48 +156,49 @@ const AllTiles = () => {
 
                     {/* Sorting & Layout View Toggle */}
                     <div className="flex items-center gap-3 justify-between md:justify-end">
-                        <div className="flex items-center gap-2 bg-zinc-800/80 border border-zinc-700 rounded-xl px-3 py-1.5 text-xs text-gray-300">
-                            <BiSort className="text-amber-400 w-4 h-4" />
-                            <span className="hidden sm:inline">Sort:</span>
+                        <div className="flex items-center gap-2 bg-white/[0.03] border border-white/[0.08] rounded-xl px-3 py-1.5 text-xs text-zinc-300">
+                            <BiSort className="text-amber-400 w-3.5 h-3.5" />
+                            <span className="hidden sm:inline text-zinc-500">Sort:</span>
                             <select
                                 value={sortBy}
                                 onChange={(e) => setSortBy(e.target.value)}
-                                className="bg-transparent text-white focus:outline-none cursor-pointer"
+                                className="bg-transparent text-zinc-200 focus:outline-none cursor-pointer text-xs"
                             >
-                                <option value="default" className="bg-zinc-900 text-white">Default</option>
-                                <option value="price-low" className="bg-zinc-900 text-white">Price: Low to High</option>
-                                <option value="price-high" className="bg-zinc-900 text-white">Price: High to Low</option>
-                                <option value="title" className="bg-zinc-900 text-white">Name: A to Z</option>
+                                <option value="default" className="bg-[#121215] text-white">Default</option>
+                                <option value="price-low" className="bg-[#121215] text-white">Price: Low to High</option>
+                                <option value="price-high" className="bg-[#121215] text-white">Price: High to Low</option>
+                                <option value="title" className="bg-[#121215] text-white">Name: A to Z</option>
                             </select>
                         </div>
 
                         {/* View Switcher */}
-                        <div className="flex items-center bg-zinc-800/80 border border-zinc-700 rounded-xl p-1">
+                        <div className="flex items-center bg-white/[0.03] border border-white/[0.08] rounded-xl p-1">
                             <button
                                 onClick={() => setViewMode("grid")}
                                 title="Grid View"
-                                className={`p-2 rounded-lg transition ${
-                                    viewMode === "grid" ? "bg-amber-500 text-black font-bold" : "text-gray-400 hover:text-white"
+                                className={`p-1.5 rounded-lg transition cursor-pointer ${
+                                    viewMode === "grid" ? "bg-white text-zinc-950 shadow-sm" : "text-zinc-500 hover:text-white"
                                 }`}
                             >
-                                <FaThLarge className="w-3.5 h-3.5" />
+                                <FaThLarge className="w-3 h-3" />
                             </button>
                             <button
                                 onClick={() => setViewMode("list")}
                                 title="List View"
-                                className={`p-2 rounded-lg transition ${
-                                    viewMode === "list" ? "bg-amber-500 text-black font-bold" : "text-gray-400 hover:text-white"
+                                className={`p-1.5 rounded-lg transition cursor-pointer ${
+                                    viewMode === "list" ? "bg-white text-zinc-950 shadow-sm" : "text-zinc-500 hover:text-white"
                                 }`}
                             >
-                                <FaList className="w-3.5 h-3.5" />
+                                <FaList className="w-3 h-3" />
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <div className="mt-3 text-xs text-gray-400 text-right">
-                    Showing <span className="text-amber-400 font-bold">{filteredAndSortedTiles.length}</span> items
+                <div className="mt-3 text-xs text-zinc-500 text-right font-light">
+                    Showing <span className="text-zinc-200 font-medium">{filteredAndSortedTiles.length}</span> items
                 </div>
+
             </div>
 
             {loading && (
