@@ -49,36 +49,37 @@ const Showcase = () => {
     };
 
     return (
-        <section className="bg-gradient-to-r from-zinc-800 to-gray-700 py-20 px-6 md:px-12 border-t border-white/5 overflow-hidden">
-            <div className="max-w-7xl mx-auto">
+    return (
+        <section className="bg-[#0c0c0e] py-24 px-4 sm:px-6 lg:px-12 border-t border-white/[0.06] overflow-hidden">
+            <div className="max-w-[1600px] mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-16">
                     <motion.div 
-                        initial={{ opacity: 0, x: -30 }}
+                        initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="space-y-3"
+                        className="space-y-2 text-left"
                     >
-                        <span className="text-[#FFD700] text-xs font-bold uppercase tracking-widest bg-[#FFD700]/10 px-4 py-1.5 rounded-full border border-[#FFD700]/20">
-                            The Collection
+                        <span className="text-amber-400 text-xs font-semibold uppercase tracking-[0.25em]">
+                            Surface Typology
                         </span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-white">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-white">
                             Architectural Finishes
                         </h2>
-                        <p className="text-gray-300 text-sm md:text-base max-w-2xl">
-                            Filter through premium textures meticulously polished and calibrated for residential and commercial spaces.
+                        <p className="text-zinc-400 text-sm md:text-base max-w-2xl font-light leading-relaxed">
+                            Meticulously calibrated stone and porcelain formats curated for modern residences, hospitality, and commercial facades.
                         </p>
                     </motion.div>
                     
                     <motion.div
-                        initial={{ opacity: 0, x: 30 }}
+                        initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     >
                         <Link href="/all-tiles">
-                            <button className="px-8 py-3.5 bg-white text-black font-bold rounded-2xl hover:scale-105 hover:bg-zinc-200 transition shadow-lg cursor-pointer">
-                                View All Tiles
+                            <button className="px-6 py-3 rounded-full border border-white/15 hover:border-white/30 text-zinc-300 hover:text-white bg-white/[0.02] hover:bg-white/[0.06] text-xs font-semibold uppercase tracking-wider transition cursor-pointer">
+                                View Full Collection &rarr;
                             </button>
                         </Link>
                     </motion.div>
@@ -89,45 +90,52 @@ const Showcase = () => {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-50px" }}
-                    className="grid grid-cols-1 md:grid-cols-3 gap-8"
+                    className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
                 >
                     {categories.map((cat, idx) => (
                         <motion.div 
                             key={idx}
                             variants={cardVariants}
-                            whileHover={{ scale: 1.02 }}
+                            whileHover={{ y: -6 }}
                             transition={{ duration: 0.3 }}
-                            className="group relative rounded-3xl overflow-hidden border border-white/10 bg-white/5 h-[480px] flex flex-col justify-end p-8 shadow-2xl hover:border-white/20 transition-all duration-300 cursor-pointer"
+                            className="group relative rounded-3xl overflow-hidden border border-white/[0.08] hover:border-white/20 bg-zinc-950 h-[520px] flex flex-col justify-end p-8 sm:p-10 shadow-2xl transition-all duration-500 cursor-pointer"
                         >
                             {/* Background Image */}
                             <Image 
                                 src={cat.image}
                                 alt={cat.title}
                                 fill
-                                className="object-cover absolute inset-0 z-0 group-hover:scale-105 transition duration-700 opacity-60 group-hover:opacity-80"
+                                className="object-cover absolute inset-0 z-0 group-hover:scale-105 transition-transform duration-700 opacity-60 group-hover:opacity-75"
                                 unoptimized
                             />
                             
                             {/* Dark Gradient Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10"></div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent z-10"></div>
 
                             {/* Content */}
-                            <div className="relative z-20 space-y-4 translate-y-4 group-hover:translate-y-0 transition duration-500">
-                                <h3 className="text-2xl font-bold text-white">{cat.title}</h3>
-                                <p className="text-zinc-300 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <div className="relative z-20 space-y-3">
+                                <span className="text-[10px] tracking-[0.25em] uppercase font-semibold text-amber-300/80">
+                                    Series 0{idx + 1}
+                                </span>
+                                <h3 className="text-2xl sm:text-3xl font-light text-white tracking-tight">
+                                    {cat.title}
+                                </h3>
+                                <p className="text-zinc-300 text-xs sm:text-sm font-light leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity duration-300">
                                     {cat.description}
                                 </p>
-                                <Link href={cat.link} className="inline-block mt-2">
-                                    <span className="text-[#FFD700] hover:text-white text-sm font-semibold transition flex items-center gap-1">
-                                        Explore Details →
-                                    </span>
-                                </Link>
+                                <div className="pt-2">
+                                    <Link href={cat.link} className="inline-flex items-center gap-2 text-xs uppercase tracking-wider font-semibold text-amber-300 hover:text-white transition-colors">
+                                        <span>Examine Specifications</span>
+                                        <span>&rarr;</span>
+                                    </Link>
+                                </div>
                             </div>
                         </motion.div>
                     ))}
                 </motion.div>
             </div>
         </section>
+
     );
 };
 
