@@ -175,10 +175,12 @@ const TileDetails = ({ params: paramsPromise }) => {
                 {/* LEFT HERO IMAGE CANVAS */}
                 <div className="lg:col-span-7 relative w-full h-[400px] sm:h-[520px] lg:h-[680px] rounded-2xl overflow-hidden border border-white/[0.08] bg-zinc-950 group">
                     <Image
+                        id={tile.id}
                         src={tile.image}
                         alt={tile.title}
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="card-img object-cover transition-transform duration-700 group-hover:scale-105"
+                        style={{ viewTransitionName: tile.id }}
                         priority
                         unoptimized
                     />

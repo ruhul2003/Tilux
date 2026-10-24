@@ -239,27 +239,36 @@ const AllTiles = () => {
                                 }`}
                             >
                                 <div className={`relative overflow-hidden bg-zinc-950 ${viewMode === "list" ? "w-full sm:w-56 h-44 rounded-xl flex-shrink-0" : "w-full h-60"}`}>
-                                    <Image
-                                        src={tile.image}
-                                        alt={tile.title}
-                                        fill
-                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
-                                        className="object-cover group-hover:scale-105 transition duration-500 opacity-90 group-hover:opacity-100"
-                                    />
+                                    <Link href={`/all-tiles/${tile.id}`} className="block w-full h-full relative">
+                                        <Image
+                                            id={tile.id}
+                                            src={tile.image}
+                                            alt={tile.title}
+                                            fill
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
+                                            className="card-img object-cover group-hover:scale-105 transition duration-500 opacity-90 group-hover:opacity-100"
+                                            style={{ viewTransitionName: tile.id }}
+                                        />
+                                    </Link>
                                     {/* Quick View Hover Button */}
                                     <button
-                                        onClick={() => setQuickViewTile(tile)}
-                                        className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-200 flex items-center justify-center text-white gap-2 font-medium text-xs backdrop-blur-xs cursor-pointer"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setQuickViewTile(tile);
+                                        }}
+                                        className="absolute bottom-3 right-3 bg-black/70 hover:bg-black/90 text-white px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition duration-200 flex items-center justify-center gap-1.5 font-medium text-[11px] backdrop-blur-md cursor-pointer border border-white/10 z-10"
                                     >
-                                        <FaEye className="w-3.5 h-3.5 text-amber-300" /> Quick Preview
+                                        <FaEye className="w-3 h-3 text-amber-300" /> Quick Preview
                                     </button>
                                 </div>
 
                                 <div className={`flex flex-col flex-grow ${viewMode === "list" ? "w-full" : "p-6"}`}>
                                     <div className="flex justify-between items-start mb-2 gap-2">
-                                        <h2 className="text-base font-semibold text-white group-hover:text-amber-200 transition line-clamp-1">
-                                            {tile.title}
-                                        </h2>
+                                        <Link href={`/all-tiles/${tile.id}`}>
+                                            <h2 className="text-base font-semibold text-white group-hover:text-amber-200 transition line-clamp-1">
+                                                {tile.title}
+                                            </h2>
+                                        </Link>
                                         <span
                                             className={`text-[10px] uppercase tracking-wider font-medium px-2 py-0.5 rounded-full border ${
                                                 tile.inStock
@@ -342,10 +351,12 @@ const AllTiles = () => {
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
                                 <div className="relative w-full h-64 sm:h-72 rounded-2xl overflow-hidden border border-white/[0.08] bg-zinc-950">
                                     <Image
+                                        id={quickViewTile.id}
                                         src={quickViewTile.image}
                                         alt={quickViewTile.title}
                                         fill
-                                        className="object-cover"
+                                        className="card-img object-cover"
+                                        style={{ viewTransitionName: quickViewTile.id }}
                                     />
                                 </div>
 

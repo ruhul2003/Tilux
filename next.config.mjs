@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    experimental: {
+        viewTransition: true,
+    },
     images: {
         remotePatterns: [
             { protocol: "https", hostname: "images.unsplash.com" },
@@ -8,7 +11,6 @@ const nextConfig = {
             { protocol: "https", hostname: "ui-avatars.com" },
             { protocol: "https", hostname: "photoforprofile.com" },
             { protocol: "https", hostname: "image.com" },
-
         ],
     },
 };

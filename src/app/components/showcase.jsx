@@ -8,22 +8,25 @@ import { motion } from "framer-motion";
 const Showcase = () => {
     const categories = [
         {
+            id: "tile_001",
             title: "Royal Italian Marble",
             description: "Timeless luxury with pristine white surfaces and delicate organic veining.",
             image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6",
-            link: "/all-tiles"
+            link: "/all-tiles/tile_001"
         },
         {
+            id: "tile_002",
             title: "Midnight Granite",
             description: "Ultra-durable polished slabs engineered for modern kitchens and patios.",
             image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c",
-            link: "/all-tiles"
+            link: "/all-tiles/tile_002"
         },
         {
+            id: "tile_003",
             title: "Earthy Ceramic & Wood",
             description: "Warm organic textures combining natural beauty with waterproof utility.",
             image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
-            link: "/all-tiles"
+            link: "/all-tiles/tile_003"
         }
     ];
 
@@ -101,10 +104,12 @@ const Showcase = () => {
                         >
                             {/* Background Image */}
                             <Image 
+                                id={cat.id}
                                 src={cat.image}
                                 alt={cat.title}
                                 fill
-                                className="object-cover absolute inset-0 z-0 group-hover:scale-105 transition-transform duration-700 opacity-60 group-hover:opacity-75"
+                                className="card-img object-cover absolute inset-0 z-0 group-hover:scale-105 transition-transform duration-700 opacity-60 group-hover:opacity-75"
+                                style={{ viewTransitionName: cat.id }}
                                 unoptimized
                             />
                             

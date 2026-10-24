@@ -281,14 +281,18 @@ const Banner = () => {
                                 className="group rounded-2xl border border-white/[0.08] bg-[#121215]/80 hover:bg-[#18181c] hover:border-white/20 shadow-lg overflow-hidden text-left flex flex-col transition-all duration-300"
                             >
                                 <div className="relative w-full h-64 overflow-hidden bg-zinc-950">
-                                    <Image
-                                        src={tile.image}
-                                        alt={tile.title}
-                                        fill
-                                        sizes="(max-width: 768px) 100vw, 25vw"
-                                        className="object-cover group-hover:scale-105 transition duration-700 opacity-90 group-hover:opacity-100"
-                                    />
-                                    <div className="absolute top-3 left-3">
+                                    <Link href={`/all-tiles/${tile.id}`} className="block w-full h-full relative">
+                                        <Image
+                                            id={tile.id}
+                                            src={tile.image}
+                                            alt={tile.title}
+                                            fill
+                                            sizes="(max-width: 768px) 100vw, 25vw"
+                                            className="card-img object-cover group-hover:scale-105 transition duration-700 opacity-90 group-hover:opacity-100"
+                                            style={{ viewTransitionName: tile.id }}
+                                        />
+                                    </Link>
+                                    <div className="absolute top-3 left-3 pointer-events-none">
                                         <span className={`text-[10px] uppercase tracking-wider font-medium px-2.5 py-1 rounded-full backdrop-blur-md border ${
                                             tile.inStock 
                                                 ? "text-emerald-300 bg-emerald-950/60 border-emerald-500/30" 
